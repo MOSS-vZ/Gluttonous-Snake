@@ -40,6 +40,7 @@
 
 #include "ti_msp_dl_config.h"
 
+DL_TimerA_backupConfig gTIMER_0Backup;
 DL_SPI_backupConfig gSPI_0Backup;
 DL_TRNG_backupConfig gTRNGBackup;
 
@@ -53,9 +54,11 @@ SYSCONFIG_WEAK void SYSCFG_DL_init(void)
     SYSCFG_DL_GPIO_init();
     /* Module-Specific Initializations*/
     SYSCFG_DL_SYSCTL_init();
+    SYSCFG_DL_TIMER_0_init();
     SYSCFG_DL_SPI_0_init();
     SYSCFG_DL_TRNG_init();
     /* Ensure backup structures have no valid state */
+	gTIMER_0Backup.backupRdy 	= false;
 	gSPI_0Backup.backupRdy 	= false;
 	gTRNGBackup.backupRdy 	= false;
 
@@ -68,6 +71,7 @@ SYSCONFIG_WEAK bool SYSCFG_DL_saveConfiguration(void)
 {
     bool retStatus = true;
 
+	retStatus &= DL_TimerA_saveConfiguration(TIMER_0_INST, &gTIMER_0Backup);
 	retStatus &= DL_SPI_saveConfiguration(SPI_0_INST, &gSPI_0Backup);
 	retStatus &= DL_TRNG_saveConfiguration(TRNG, &gTRNGBackup);
 
@@ -79,6 +83,7 @@ SYSCONFIG_WEAK bool SYSCFG_DL_restoreConfiguration(void)
 {
     bool retStatus = true;
 
+	retStatus &= DL_TimerA_restoreConfiguration(TIMER_0_INST, &gTIMER_0Backup, false);
 	retStatus &= DL_SPI_restoreConfiguration(SPI_0_INST, &gSPI_0Backup);
 	retStatus &= DL_TRNG_restoreConfiguration(TRNG, &gTRNGBackup);
 
@@ -90,12 +95,14 @@ SYSCONFIG_WEAK void SYSCFG_DL_initPower(void)
     DL_GPIO_reset(GPIOA);
     DL_GPIO_reset(GPIOB);
     DL_GPIO_reset(GPIOC);
+    DL_TimerA_reset(TIMER_0_INST);
     DL_SPI_reset(SPI_0_INST);
     DL_TRNG_reset(TRNG);
 
     DL_GPIO_enablePower(GPIOA);
     DL_GPIO_enablePower(GPIOB);
     DL_GPIO_enablePower(GPIOC);
+    DL_TimerA_enablePower(TIMER_0_INST);
     DL_SPI_enablePower(SPI_0_INST);
     DL_TRNG_enablePower(TRNG);
     delay_cycles(POWER_STARTUP_DELAY);
@@ -214,13 +221,13 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
 
     DL_GPIO_initDigitalOutput(switch_sw8_IOMUX);
 
-    DL_GPIO_clearPins(GPIOA, LED_L2_PIN |
-		switch_sw3_PIN |
+    DL_GPIO_clearPins(GPIOA, switch_sw3_PIN |
 		switch_sw4_PIN |
 		switch_sw5_PIN |
 		switch_sw6_PIN |
 		switch_sw7_PIN);
-    DL_GPIO_setPins(GPIOA, LED_L1_PIN);
+    DL_GPIO_setPins(GPIOA, LED_L1_PIN |
+		LED_L2_PIN);
     DL_GPIO_enableOutput(GPIOA, LED_L1_PIN |
 		LED_L2_PIN |
 		switch_sw3_PIN |
@@ -230,16 +237,16 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
 		switch_sw7_PIN);
     DL_GPIO_clearPins(GPIOB, IMU_CS_IMU_PIN |
 		W25Q64_CS_W25Q64_PIN |
-		LED_L3_PIN |
-		LED_L4_PIN |
-		LED_L5_PIN |
-		LED_L6_PIN |
 		keyboard_H1_PIN |
 		keyboard_H2_PIN |
 		keyboard_H3_PIN |
 		keyboard_H4_PIN |
 		OLED_RES_PIN |
 		switch_sw8_PIN);
+    DL_GPIO_setPins(GPIOB, LED_L3_PIN |
+		LED_L4_PIN |
+		LED_L5_PIN |
+		LED_L6_PIN);
     DL_GPIO_enableOutput(GPIOB, IMU_CS_IMU_PIN |
 		W25Q64_CS_W25Q64_PIN |
 		LED_L3_PIN |
@@ -255,10 +262,10 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
     DL_GPIO_setUpperPinsPolarity(GPIOB, DL_GPIO_PIN_31_EDGE_FALL);
     DL_GPIO_clearInterruptStatus(GPIOB, key_user_PIN);
     DL_GPIO_enableInterrupt(GPIOB, key_user_PIN);
-    DL_GPIO_clearPins(GPIOC, LED_L7_PIN |
-		LED_L8_PIN |
-		OLED_DC_PIN |
+    DL_GPIO_clearPins(GPIOC, OLED_DC_PIN |
 		OLED_CS_PIN);
+    DL_GPIO_setPins(GPIOC, LED_L7_PIN |
+		LED_L8_PIN);
     DL_GPIO_enableOutput(GPIOC, LED_L7_PIN |
 		LED_L8_PIN |
 		OLED_DC_PIN |
@@ -300,6 +307,45 @@ SYSCONFIG_WEAK void SYSCFG_DL_SYSCTL_init(void)
     DL_SYSCTL_enableMFPCLK();
 	DL_SYSCTL_setMFPCLKSource(DL_SYSCTL_MFPCLK_SOURCE_HFCLK);
     DL_SYSCTL_setMCLKSource(SYSOSC, HSCLK, DL_SYSCTL_HSCLK_SOURCE_SYSPLL);
+
+}
+
+
+
+/*
+ * Timer clock configuration to be sourced by MFCLK /  (500000 Hz)
+ * timerClkFreq = (timerClkSrc / (timerClkDivRatio * (timerClkPrescale + 1)))
+ *   5000 Hz = 500000 Hz / (8 * (99 + 1))
+ */
+static const DL_TimerA_ClockConfig gTIMER_0ClockConfig = {
+    .clockSel    = DL_TIMER_CLOCK_MFCLK,
+    .divideRatio = DL_TIMER_CLOCK_DIVIDE_8,
+    .prescale    = 99U,
+};
+
+/*
+ * Timer load value (where the counter starts from) is calculated as (timerPeriod * timerClockFreq) - 1
+ * TIMER_0_INST_LOAD_VALUE = (10000 ms * 5000 Hz) - 1
+ */
+static const DL_TimerA_TimerConfig gTIMER_0TimerConfig = {
+    .period     = TIMER_0_INST_LOAD_VALUE,
+    .timerMode  = DL_TIMER_TIMER_MODE_ONE_SHOT,
+    .startTimer = DL_TIMER_STOP,
+};
+
+SYSCONFIG_WEAK void SYSCFG_DL_TIMER_0_init(void) {
+
+    DL_TimerA_setClockConfig(TIMER_0_INST,
+        (DL_TimerA_ClockConfig *) &gTIMER_0ClockConfig);
+
+    DL_TimerA_initTimerMode(TIMER_0_INST,
+        (DL_TimerA_TimerConfig *) &gTIMER_0TimerConfig);
+    DL_TimerA_enableInterrupt(TIMER_0_INST , DL_TIMERA_INTERRUPT_ZERO_EVENT);
+    DL_TimerA_enableClock(TIMER_0_INST);
+
+
+
+
 
 }
 

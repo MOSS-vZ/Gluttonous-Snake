@@ -82,6 +82,14 @@ extern "C" {
 
 
 
+/* Defines for TIMER_0 */
+#define TIMER_0_INST                                                     (TIMA0)
+#define TIMER_0_INST_IRQHandler                                 TIMA0_IRQHandler
+#define TIMER_0_INST_INT_IRQN                                   (TIMA0_INT_IRQn)
+#define TIMER_0_INST_LOAD_VALUE                                         (49999U)
+
+
+
 /* Defines for SPI_0 */
 #define SPI_0_INST                                                         SPI0
 #define SPI_0_INST_IRQHandler                                   SPI0_IRQHandler
@@ -241,6 +249,7 @@ void SYSCFG_DL_init(void);
 void SYSCFG_DL_initPower(void);
 void SYSCFG_DL_GPIO_init(void);
 void SYSCFG_DL_SYSCTL_init(void);
+void SYSCFG_DL_TIMER_0_init(void);
 void SYSCFG_DL_SPI_0_init(void);
 
 void SYSCFG_DL_TRNG_init(void);
