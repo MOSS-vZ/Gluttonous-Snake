@@ -1,6 +1,6 @@
 #include "function.h"
 #include "ti_msp_dl_config.h"
-#include "oled_spi_V0.2.h"
+#include "interface.h"
 #include "Keyboard.h"
 #include <stdlib.h>
 #include <time.h>
@@ -11,13 +11,17 @@ p food = { 0, 0 };//定义食物
 bool is_over = 0;//结束标志
 bool is_time = 0;//定时器标志
 uint8_t direction = 0;
+uint8_t score = 0;
+// uint8_t time = 0;
 
 void game()
 {
-    DL_GPIO_setPins(LED_L1_PORT, LED_L1_PIN);
+    // DL_GPIO_setPins(LED_L1_PORT, LED_L1_PIN);
 
     OLED_Clear();
     snake_init();//初始化
+    frame_screen();
+    prompt_screen();
 
     bool is_key = 0;
     while (!is_over)
@@ -31,6 +35,8 @@ void game()
         if (is_eat())
         {
             len++;
+            score += 5;
+            prompt_screen();
             DL_Timer_stopCounter(TIMER_0_INST);//停止定时器
             is_time = 0;
         }
@@ -38,11 +44,28 @@ void game()
         if (key && !is_key)
         {
             is_key = 1;
-            direction = key - '0';
+            switch (key)
+            {
+            case '#':
+                pause_screen();
+                break;
+            case '*':
+                is_over = 1;
+                break;
+            case '2':case '8':case '4':case '6':
+                direction = key - '0';
+                break;
+            default:
+                break;
+            }
         }
         else
             is_key = 0;
     }
+    is_over = 0;
+    score = 0;
+    direction = 0;
+    len = initial_length;
 }
 
 void move()
@@ -89,7 +112,15 @@ void snake_init()
 
 void snake_refresh(uint8_t length)
 {
+    frame_screen();
     //边界判断
+    if (snake[0].x < left_boundary || snake[0].x >= right_boundary || snake[0].y < upper_boundary || snake[0].y >= lower_boundary)
+    {
+        score -= 2;
+        prompt_screen();
+        // DL_GPIO_togglePins(LED_L1_PORT, LED_L1_PIN);
+    }
+
     if (snake[0].x < left_boundary)
         snake[0].x = right_boundary;
     if (snake[0].x > right_boundary)
@@ -120,8 +151,8 @@ void food_generator()
     // 生成不重叠的新食物
     uint8_t x, y;
     do {
-        x = random_range(left_boundary, right_boundary);
-        y = random_range(upper_boundary, lower_boundary);
+        x = random_range(left_boundary + 1, right_boundary - 1);
+        y = random_range(upper_boundary + 1, lower_boundary - 1);
     } while (is_food_on_snake(x, y));
 
     food.x = x;

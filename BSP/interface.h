@@ -5,5 +5,8 @@
 
 void boot_screen();
 void choice_screen();
+void frame_screen();
+void prompt_screen();
+void pause_screen();
 
 #endif

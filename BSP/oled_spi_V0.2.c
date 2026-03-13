@@ -23,13 +23,13 @@ void OLED_WR_Byte(u8 dat, u8 cmd)
     {
         OLED_DC_Clr();
     }
-	OLED_CS_Clr();
-    while (DL_SPI_isBusy(SPI_OLED_INST)){
+    OLED_CS_Clr();
+    while (DL_SPI_isBusy(SPI_OLED_INST)) {
     }
     DL_SPI_transmitData8(SPI_OLED_INST, dat);
-    while (DL_SPI_isBusy(SPI_OLED_INST)){
+    while (DL_SPI_isBusy(SPI_OLED_INST)) {
     }
-	OLED_CS_Set();
+    OLED_CS_Set();
     OLED_DC_Set();
 }
 
@@ -96,6 +96,17 @@ void OLED_ShowChar(u8 x, u8 y, char chr)
             OLED_WR_Byte(F6x8[c][i], OLED_DATA);
     }
 }
+
+void OLED_ShowChar_small(u8 x, u8 y, char chr)
+{
+    unsigned char c = chr - ' ';  // 字库偏移
+    if (y >= 8) return;           // 页必须 0~7
+    for (u8 i = 0; i < 6; i++)
+    {
+        if (x + i < 128)
+            OLED_GRAM[x + i][y] = F6x8[c][i];  // 写入页 y
+    }
+}
 // m^n鍑芥暟
 u32 oled_pow(u8 m, u8 n)
 {
@@ -111,8 +122,33 @@ u32 oled_pow(u8 m, u8 n)
 // num:鏁板??(0~4294967295);
 void OLED_ShowNum(u8 x, u8 y, u32 num, u8 len, u8 size2)
 {
+    // u8 t, temp;
+    // u8 enshow = 0;
+    // for (t = 0; t < len; t++)
+    // {
+    //     temp = (num / oled_pow(10, len - t - 1)) % 10;
+    //     if (enshow == 0 && t < (len - 1))
+    //     {
+    //         if (temp == 0)
+    //         {
+    //             OLED_ShowChar(x + (size2 / 2) * t, y, ' ');
+    //             continue;
+    //         }
+    //         else
+    //             enshow = 1;
+    //     }
+    //     OLED_ShowChar(x + (size2 / 2) * t, y, temp + '0');
+    // }
+
     u8 t, temp;
     u8 enshow = 0;
+    u8 step;  // 字符宽度步进
+
+    if (size2 == 8)
+        step = 6;          // 小字体宽度6
+    else
+        step = size2 / 2;  // 大字体宽度（假设高度/2）
+
     for (t = 0; t < len; t++)
     {
         temp = (num / oled_pow(10, len - t - 1)) % 10;
@@ -120,13 +156,21 @@ void OLED_ShowNum(u8 x, u8 y, u32 num, u8 len, u8 size2)
         {
             if (temp == 0)
             {
-                OLED_ShowChar(x + (size2 / 2) * t, y, ' ');
+                // 显示空格
+                if (size2 == 8)
+                    OLED_ShowChar_small(x + step * t, y, ' ');
+                else
+                    OLED_ShowChar(x + step * t, y, ' ');
                 continue;
             }
             else
                 enshow = 1;
         }
-        OLED_ShowChar(x + (size2 / 2) * t, y, temp + '0');
+        // 显示数字字符
+        if (size2 == 8)
+            OLED_ShowChar_small(x + step * t, y, temp + '0');
+        else
+            OLED_ShowChar(x + step * t, y, temp + '0');
     }
 }
 
@@ -168,7 +212,7 @@ void OLED_ShowSignedNum(u8 x, u8 y, int32_t num, u8 len, u8 size2)//鍙互鏄
     }
 }
 // 鏄剧ず涓?涓瓧绗﹀彿涓?
-void OLED_ShowString(u8 x, u8 y, char *chr)
+void OLED_ShowString(u8 x, u8 y, char* chr)
 {
     unsigned char j = 0;
     while (chr[j] != '\0')
@@ -200,6 +244,19 @@ void OLED_ShowCHinese(u8 x, u8 y, u8 no)
         adder += 1;
     }
 }
+
+void OLED_ShowCHinese_small(u8 x, u8 y, u8 no)
+{
+    u8 t, adder = 0;
+    OLED_Set_Pos(x, y);
+    for (t = 0; t < 8; t++)
+    {
+        // OLED_WR_Byte(Hzk_small[no][t], OLED_DATA);
+        if (x + t < 128) // 防止列越界
+            OLED_GRAM[x + t][y] = Hzk_small[no][t];
+        adder += 1;
+    }
+}
 /***********鍔熻兘鎻忚堪锛氭樉绀烘樉绀築MP鍥剧墖128脳64璧峰鐐瑰潗鏍?(x,y),x鐨勮寖鍥?0锝?127锛寉涓洪渶瑕佷娇鐢ㄧ殑椤电殑鑼冨洿1锝?8*****************/
 void OLED_DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1, const unsigned char BMP[])
 {
@@ -222,136 +279,136 @@ void OLED_DrawBMP(unsigned char x0, unsigned char y0, unsigned char x1, unsigned
 //·′??oˉêy
 void OLED_ColorTurn(u8 i)
 {
-	if(i==0)
-		{
-			OLED_WR_Byte(0xA6,OLED_CMD);//?y3￡??ê?
-		}
-	if(i==1)
-		{
-			OLED_WR_Byte(0xA7,OLED_CMD);//·′é???ê?
-		}
+    if (i == 0)
+    {
+        OLED_WR_Byte(0xA6, OLED_CMD);//?y3￡??ê?
+    }
+    if (i == 1)
+    {
+        OLED_WR_Byte(0xA7, OLED_CMD);//·′é???ê?
+    }
 }
 
 //?á??Dy×a180?è
 void OLED_DisplayTurn(u8 i)
 {
-	if(i==0)
-		{
-			OLED_WR_Byte(0xC8,OLED_CMD);//?y3￡??ê?
-			OLED_WR_Byte(0xA1,OLED_CMD);
-		}
-	if(i==1)
-		{
-			OLED_WR_Byte(0xC0,OLED_CMD);//·′×a??ê?
-			OLED_WR_Byte(0xA0,OLED_CMD);
-		}
+    if (i == 0)
+    {
+        OLED_WR_Byte(0xC8, OLED_CMD);//?y3￡??ê?
+        OLED_WR_Byte(0xA1, OLED_CMD);
+    }
+    if (i == 1)
+    {
+        OLED_WR_Byte(0xC0, OLED_CMD);//·′×a??ê?
+        OLED_WR_Byte(0xA0, OLED_CMD);
+    }
 }
 //?üD???′?μ?OLED	
 void OLED_Refresh(void)
 {
-	u8 i,n;
-	for(i=0;i<8;i++)
-	{
-		OLED_WR_Byte(0xb0+i,OLED_CMD); //éè??DD?eê?μ??·
-		OLED_WR_Byte(0x00,OLED_CMD);   //éè??μíáD?eê?μ??·
-		OLED_WR_Byte(0x10,OLED_CMD);   //éè????áD?eê?μ??·
-		OLED_CS_Clr();
-		delay_cycles(CPU_Frq * 5);
-        while (DL_SPI_isBusy(SPI_OLED_INST)){}
-//        DL_SPI_transmitData8(SPI_OLED_INST, 0x78);
-//        while (DL_SPI_isBusy(SPI_OLED_INST)){}
-//		DL_SPI_transmitData8(SPI_OLED_INST, 0x78);
-//        while (DL_SPI_isBusy(SPI_OLED_INST)){}
-//		DL_SPI_transmitData8(SPI_OLED_INST, 0x40);
-		while (DL_SPI_isBusy(SPI_OLED_INST)){}
-		for(n=0;n<128;n++){
+    u8 i, n;
+    for (i = 0;i < 8;i++)
+    {
+        OLED_WR_Byte(0xb0 + i, OLED_CMD); //éè??DD?eê?μ??·
+        OLED_WR_Byte(0x00, OLED_CMD);   //éè??μíáD?eê?μ??·
+        OLED_WR_Byte(0x10, OLED_CMD);   //éè????áD?eê?μ??·
+        OLED_CS_Clr();
+        delay_cycles(CPU_Frq * 5);
+        while (DL_SPI_isBusy(SPI_OLED_INST)) {}
+        //        DL_SPI_transmitData8(SPI_OLED_INST, 0x78);
+        //        while (DL_SPI_isBusy(SPI_OLED_INST)){}
+        //		DL_SPI_transmitData8(SPI_OLED_INST, 0x78);
+        //        while (DL_SPI_isBusy(SPI_OLED_INST)){}
+        //		DL_SPI_transmitData8(SPI_OLED_INST, 0x40);
+        while (DL_SPI_isBusy(SPI_OLED_INST)) {}
+        for (n = 0;n < 128;n++) {
             DL_SPI_transmitData8(SPI_OLED_INST, OLED_GRAM[n][i]);
-			// Send_Byte(OLED_GRAM[n][i]);
-			while (DL_SPI_isBusy(SPI_OLED_INST)){}
-		}
-		delay_cycles(CPU_Frq * 5);
-		OLED_CS_Set();
-		// I2C_Stop();
-  }
+            // Send_Byte(OLED_GRAM[n][i]);
+            while (DL_SPI_isBusy(SPI_OLED_INST)) {}
+        }
+        delay_cycles(CPU_Frq * 5);
+        OLED_CS_Set();
+        // I2C_Stop();
+    }
 }
 //?-μ? 
 //x:0~127
 //y:0~63
 //t:1 ì?3? 0,????	
-void OLED_DrawPoint(u8 x,u8 y,u8 t)
+void OLED_DrawPoint(u8 x, u8 y, u8 t)
 {
-	u8 i,m,n;
-	i=y/8;
-	m=y%8;
-	n=1<<m;
-	if(t){OLED_GRAM[x][i]|=n;}
-	else
-	{
-		OLED_GRAM[x][i]=~OLED_GRAM[x][i];
-		OLED_GRAM[x][i]|=n;
-		OLED_GRAM[x][i]=~OLED_GRAM[x][i];
-	}
+    u8 i, m, n;
+    i = y / 8;
+    m = y % 8;
+    n = 1 << m;
+    if (t) { OLED_GRAM[x][i] |= n; }
+    else
+    {
+        OLED_GRAM[x][i] = ~OLED_GRAM[x][i];
+        OLED_GRAM[x][i] |= n;
+        OLED_GRAM[x][i] = ~OLED_GRAM[x][i];
+    }
 }
 
 //?-??
 //x1,y1:?eμ?×?±ê
 //x2,y2:?áê?×?±ê
-void OLED_DrawLine(u8 x1,u8 y1,u8 x2,u8 y2,u8 mode)
+void OLED_DrawLine(u8 x1, u8 y1, u8 x2, u8 y2, u8 mode)
 {
-	uint16_t t; 
-	int xerr=0,yerr=0,delta_x,delta_y,distance;
-	int incx,incy,uRow,uCol;
-	delta_x=x2-x1; //????×?±ê??á? 
-	delta_y=y2-y1;
-	uRow=x1;//?-???eμ?×?±ê
-	uCol=y1;
-	if(delta_x>0)incx=1; //éè??μ￥2?·??ò 
-	else if (delta_x==0)incx=0;//′1?±?? 
-	else {incx=-1;delta_x=-delta_x;}
-	if(delta_y>0)incy=1;
-	else if (delta_y==0)incy=0;//?????? 
-	else {incy=-1;delta_y=-delta_x;}
-	if(delta_x>delta_y)distance=delta_x; //??è??ù±???á?×?±ê?á 
-	else distance=delta_y;
-	for(t=0;t<distance+1;t++)
-	{
-		OLED_DrawPoint(uRow,uCol,mode);//?-μ?
-		xerr+=delta_x;
-		yerr+=delta_y;
-		if(xerr>distance)
-		{
-			xerr-=distance;
-			uRow+=incx;
-		}
-		if(yerr>distance)
-		{
-			yerr-=distance;
-			uCol+=incy;
-		}
-	}
+    uint16_t t;
+    int xerr = 0, yerr = 0, delta_x, delta_y, distance;
+    int incx, incy, uRow, uCol;
+    delta_x = x2 - x1; //????×?±ê??á? 
+    delta_y = y2 - y1;
+    uRow = x1;//?-???eμ?×?±ê
+    uCol = y1;
+    if (delta_x > 0)incx = 1; //éè??μ￥2?·??ò 
+    else if (delta_x == 0)incx = 0;//′1?±?? 
+    else { incx = -1;delta_x = -delta_x; }
+    if (delta_y > 0)incy = 1;
+    else if (delta_y == 0)incy = 0;//?????? 
+    else { incy = -1;delta_y = -delta_x; }
+    if (delta_x > delta_y)distance = delta_x; //??è??ù±???á?×?±ê?á 
+    else distance = delta_y;
+    for (t = 0;t < distance + 1;t++)
+    {
+        OLED_DrawPoint(uRow, uCol, mode);//?-μ?
+        xerr += delta_x;
+        yerr += delta_y;
+        if (xerr > distance)
+        {
+            xerr -= distance;
+            uRow += incx;
+        }
+        if (yerr > distance)
+        {
+            yerr -= distance;
+            uCol += incy;
+        }
+    }
 }
 //x,y:?2D?×?±ê
 //r:?2μ?°???
-void OLED_DrawCircle(u8 x,u8 y,u8 r)
+void OLED_DrawCircle(u8 x, u8 y, u8 r)
 {
-	int a, b,num;
+    int a, b, num;
     a = 0;
     b = r;
-    while(2 * b * b >= r * r)      
+    while (2 * b * b >= r * r)
     {
-        OLED_DrawPoint(x + a, y - b,1);
-        OLED_DrawPoint(x - a, y - b,1);
-        OLED_DrawPoint(x - a, y + b,1);
-        OLED_DrawPoint(x + a, y + b,1);
- 
-        OLED_DrawPoint(x + b, y + a,1);
-        OLED_DrawPoint(x + b, y - a,1);
-        OLED_DrawPoint(x - b, y - a,1);
-        OLED_DrawPoint(x - b, y + a,1);
-        
+        OLED_DrawPoint(x + a, y - b, 1);
+        OLED_DrawPoint(x - a, y - b, 1);
+        OLED_DrawPoint(x - a, y + b, 1);
+        OLED_DrawPoint(x + a, y + b, 1);
+
+        OLED_DrawPoint(x + b, y + a, 1);
+        OLED_DrawPoint(x + b, y - a, 1);
+        OLED_DrawPoint(x - b, y - a, 1);
+        OLED_DrawPoint(x - b, y + a, 1);
+
         a++;
-        num = (a * a + b * b) - r*r;//?????-μ?μ?à??2D?μ??àà?
-        if(num > 0)
+        num = (a * a + b * b) - r * r;//?????-μ?μ?à??2D?μ??àà?
+        if (num > 0)
         {
             b--;
             a--;
@@ -362,78 +419,78 @@ void OLED_DrawCircle(u8 x,u8 y,u8 r)
 // 鍒濆鍖朣SD1306
 void OLED_Init(void)
 {
-	
-	OLED_RST_Set();
-	delay_cycles(CPU_Frq * 100);
-	OLED_RST_Clr();
-	delay_cycles(CPU_Frq * 100);
-	OLED_RST_Set(); 
-	
-	OLED_WR_Byte(0xAE,OLED_CMD);//--turn off oled panel
-	OLED_WR_Byte(0x02,OLED_CMD);//---set low column address
-	OLED_WR_Byte(0x10,OLED_CMD);//---set high column address
-	OLED_WR_Byte(0x40,OLED_CMD);//--set start line address  Set Mapping RAM Display Start Line (0x00~0x3F)
-	OLED_WR_Byte(0x81,OLED_CMD);//--set contrast control register
-	OLED_WR_Byte(0xCF,OLED_CMD); // Set SEG Output Current Brightness
-	OLED_WR_Byte(0xA1,OLED_CMD);//--Set SEG/Column Mapping     0xa0宸﹀彸鍙嶇疆 0xa1姝ｅ父
-	OLED_WR_Byte(0xC8,OLED_CMD);//Set COM/Row Scan Direction   0xc0涓婁笅鍙嶇疆 0xc8姝ｅ父
-	OLED_WR_Byte(0xA6,OLED_CMD);//--set normal display
-	OLED_WR_Byte(0xA8,OLED_CMD);//--set multiplex ratio(1 to 64)
-	OLED_WR_Byte(0x3f,OLED_CMD);//--1/64 duty
-	OLED_WR_Byte(0xD3,OLED_CMD);//-set display offset	Shift Mapping RAM Counter (0x00~0x3F)
-	OLED_WR_Byte(0x00,OLED_CMD);//-not offset
-	OLED_WR_Byte(0xd5,OLED_CMD);//--set display clock divide ratio/oscillator frequency
-	OLED_WR_Byte(0x80,OLED_CMD);//--set divide ratio, Set Clock as 100 Frames/Sec
-	OLED_WR_Byte(0xD9,OLED_CMD);//--set pre-charge period
-	OLED_WR_Byte(0xF1,OLED_CMD);//Set Pre-Charge as 15 Clocks & Discharge as 1 Clock
-	OLED_WR_Byte(0xDA,OLED_CMD);//--set com pins hardware configuration
-	OLED_WR_Byte(0x12,OLED_CMD);
-	OLED_WR_Byte(0xDB,OLED_CMD);//--set vcomh
-	OLED_WR_Byte(0x40,OLED_CMD);//Set VCOM Deselect Level
-	OLED_WR_Byte(0x20,OLED_CMD);//-Set Page Addressing Mode (0x00/0x01/0x02)
-	OLED_WR_Byte(0x02,OLED_CMD);//
-	OLED_WR_Byte(0x8D,OLED_CMD);//--set Charge Pump enable/disable
-	OLED_WR_Byte(0x14,OLED_CMD);//--set(0x10) disable
-	OLED_WR_Byte(0xA4,OLED_CMD);// Disable Entire Display On (0xa4/0xa5)
-	OLED_WR_Byte(0xA6,OLED_CMD);// Disable Inverse Display On (0xa6/a7) 
-	OLED_WR_Byte(0xAF,OLED_CMD);//--turn on oled panel
-	
-	OLED_WR_Byte(0xAF,OLED_CMD); /*display ON*/ 
-	OLED_Clear();
-	OLED_Set_Pos(0,0); 	
-	
-//    OLED_WR_Byte(0xAE, OLED_CMD); //--turn off oled panel
-//    OLED_WR_Byte(0x02, OLED_CMD); //---set low column address
-//    OLED_WR_Byte(0x10, OLED_CMD); //---set high column address
-//    OLED_WR_Byte(0x40, OLED_CMD); //--set start line address  Set Mapping RAM Display Start Line (0x00~0x3F)
-//    OLED_WR_Byte(0x81, OLED_CMD); //--set contrast control register
-//    OLED_WR_Byte(0xCF, OLED_CMD); // Set SEG Output Current Brightness
-//    OLED_WR_Byte(0xA1, OLED_CMD); //--Set SEG/Column Mapping     0xa0宸﹀彸鍙嶇疆 0xa1姝ｅ父
-//    OLED_WR_Byte(0xC8, OLED_CMD); // Set COM/Row Scan Direction   0xc0涓婁笅鍙嶇疆 0xc8姝ｅ父
-//    OLED_WR_Byte(0xA6, OLED_CMD); //--set normal display
-//    OLED_WR_Byte(0xA8, OLED_CMD); //--set multiplex ratio(1 to 64)
-//    OLED_WR_Byte(0x3f, OLED_CMD); //--1/64 duty
-//    OLED_WR_Byte(0xD3, OLED_CMD); //-set display offset	Shift Mapping RAM Counter (0x00~0x3F)
-//    OLED_WR_Byte(0x00, OLED_CMD); //-not offset
-//    OLED_WR_Byte(0xd5, OLED_CMD); //--set display clock divide ratio/oscillator frequency
-//    OLED_WR_Byte(0x80, OLED_CMD); //--set divide ratio, Set Clock as 100 Frames/Sec
-//    OLED_WR_Byte(0xD9, OLED_CMD); //--set pre-charge period
-//    OLED_WR_Byte(0xF1, OLED_CMD); // Set Pre-Charge as 15 Clocks & Discharge as 1 Clock
-//    OLED_WR_Byte(0xDA, OLED_CMD); //--set com pins hardware configuration
-//    OLED_WR_Byte(0x12, OLED_CMD);
-//    OLED_WR_Byte(0xDB, OLED_CMD); //--set vcomh
-//    OLED_WR_Byte(0x40, OLED_CMD); // Set VCOM Deselect Level
-//    OLED_WR_Byte(0x20, OLED_CMD); //-Set Page Addressing Mode (0x00/0x01/0x02)
-//    OLED_WR_Byte(0x02, OLED_CMD); //
-//    OLED_WR_Byte(0x8D, OLED_CMD); //--set Charge Pump enable/disable
-//    OLED_WR_Byte(0x14, OLED_CMD); //--set(0x10) disable
-//    OLED_WR_Byte(0xA4, OLED_CMD); // Disable Entire Display On (0xa4/0xa5)
-//    OLED_WR_Byte(0xA6, OLED_CMD); // Disable Inverse Display On (0xa6/a7)
-//    OLED_WR_Byte(0xAF, OLED_CMD); //--turn on oled panel
 
-//    OLED_WR_Byte(0xAF, OLED_CMD); /*display ON*/
-//    OLED_Clear();
-//    OLED_Set_Pos(0, 0);
+    OLED_RST_Set();
+    delay_cycles(CPU_Frq * 100);
+    OLED_RST_Clr();
+    delay_cycles(CPU_Frq * 100);
+    OLED_RST_Set();
+
+    OLED_WR_Byte(0xAE, OLED_CMD);//--turn off oled panel
+    OLED_WR_Byte(0x02, OLED_CMD);//---set low column address
+    OLED_WR_Byte(0x10, OLED_CMD);//---set high column address
+    OLED_WR_Byte(0x40, OLED_CMD);//--set start line address  Set Mapping RAM Display Start Line (0x00~0x3F)
+    OLED_WR_Byte(0x81, OLED_CMD);//--set contrast control register
+    OLED_WR_Byte(0xCF, OLED_CMD); // Set SEG Output Current Brightness
+    OLED_WR_Byte(0xA1, OLED_CMD);//--Set SEG/Column Mapping     0xa0宸﹀彸鍙嶇疆 0xa1姝ｅ父
+    OLED_WR_Byte(0xC8, OLED_CMD);//Set COM/Row Scan Direction   0xc0涓婁笅鍙嶇疆 0xc8姝ｅ父
+    OLED_WR_Byte(0xA6, OLED_CMD);//--set normal display
+    OLED_WR_Byte(0xA8, OLED_CMD);//--set multiplex ratio(1 to 64)
+    OLED_WR_Byte(0x3f, OLED_CMD);//--1/64 duty
+    OLED_WR_Byte(0xD3, OLED_CMD);//-set display offset	Shift Mapping RAM Counter (0x00~0x3F)
+    OLED_WR_Byte(0x00, OLED_CMD);//-not offset
+    OLED_WR_Byte(0xd5, OLED_CMD);//--set display clock divide ratio/oscillator frequency
+    OLED_WR_Byte(0x80, OLED_CMD);//--set divide ratio, Set Clock as 100 Frames/Sec
+    OLED_WR_Byte(0xD9, OLED_CMD);//--set pre-charge period
+    OLED_WR_Byte(0xF1, OLED_CMD);//Set Pre-Charge as 15 Clocks & Discharge as 1 Clock
+    OLED_WR_Byte(0xDA, OLED_CMD);//--set com pins hardware configuration
+    OLED_WR_Byte(0x12, OLED_CMD);
+    OLED_WR_Byte(0xDB, OLED_CMD);//--set vcomh
+    OLED_WR_Byte(0x40, OLED_CMD);//Set VCOM Deselect Level
+    OLED_WR_Byte(0x20, OLED_CMD);//-Set Page Addressing Mode (0x00/0x01/0x02)
+    OLED_WR_Byte(0x02, OLED_CMD);//
+    OLED_WR_Byte(0x8D, OLED_CMD);//--set Charge Pump enable/disable
+    OLED_WR_Byte(0x14, OLED_CMD);//--set(0x10) disable
+    OLED_WR_Byte(0xA4, OLED_CMD);// Disable Entire Display On (0xa4/0xa5)
+    OLED_WR_Byte(0xA6, OLED_CMD);// Disable Inverse Display On (0xa6/a7) 
+    OLED_WR_Byte(0xAF, OLED_CMD);//--turn on oled panel
+
+    OLED_WR_Byte(0xAF, OLED_CMD); /*display ON*/
+    OLED_Clear();
+    OLED_Set_Pos(0, 0);
+
+    //    OLED_WR_Byte(0xAE, OLED_CMD); //--turn off oled panel
+    //    OLED_WR_Byte(0x02, OLED_CMD); //---set low column address
+    //    OLED_WR_Byte(0x10, OLED_CMD); //---set high column address
+    //    OLED_WR_Byte(0x40, OLED_CMD); //--set start line address  Set Mapping RAM Display Start Line (0x00~0x3F)
+    //    OLED_WR_Byte(0x81, OLED_CMD); //--set contrast control register
+    //    OLED_WR_Byte(0xCF, OLED_CMD); // Set SEG Output Current Brightness
+    //    OLED_WR_Byte(0xA1, OLED_CMD); //--Set SEG/Column Mapping     0xa0宸﹀彸鍙嶇疆 0xa1姝ｅ父
+    //    OLED_WR_Byte(0xC8, OLED_CMD); // Set COM/Row Scan Direction   0xc0涓婁笅鍙嶇疆 0xc8姝ｅ父
+    //    OLED_WR_Byte(0xA6, OLED_CMD); //--set normal display
+    //    OLED_WR_Byte(0xA8, OLED_CMD); //--set multiplex ratio(1 to 64)
+    //    OLED_WR_Byte(0x3f, OLED_CMD); //--1/64 duty
+    //    OLED_WR_Byte(0xD3, OLED_CMD); //-set display offset	Shift Mapping RAM Counter (0x00~0x3F)
+    //    OLED_WR_Byte(0x00, OLED_CMD); //-not offset
+    //    OLED_WR_Byte(0xd5, OLED_CMD); //--set display clock divide ratio/oscillator frequency
+    //    OLED_WR_Byte(0x80, OLED_CMD); //--set divide ratio, Set Clock as 100 Frames/Sec
+    //    OLED_WR_Byte(0xD9, OLED_CMD); //--set pre-charge period
+    //    OLED_WR_Byte(0xF1, OLED_CMD); // Set Pre-Charge as 15 Clocks & Discharge as 1 Clock
+    //    OLED_WR_Byte(0xDA, OLED_CMD); //--set com pins hardware configuration
+    //    OLED_WR_Byte(0x12, OLED_CMD);
+    //    OLED_WR_Byte(0xDB, OLED_CMD); //--set vcomh
+    //    OLED_WR_Byte(0x40, OLED_CMD); // Set VCOM Deselect Level
+    //    OLED_WR_Byte(0x20, OLED_CMD); //-Set Page Addressing Mode (0x00/0x01/0x02)
+    //    OLED_WR_Byte(0x02, OLED_CMD); //
+    //    OLED_WR_Byte(0x8D, OLED_CMD); //--set Charge Pump enable/disable
+    //    OLED_WR_Byte(0x14, OLED_CMD); //--set(0x10) disable
+    //    OLED_WR_Byte(0xA4, OLED_CMD); // Disable Entire Display On (0xa4/0xa5)
+    //    OLED_WR_Byte(0xA6, OLED_CMD); // Disable Inverse Display On (0xa6/a7)
+    //    OLED_WR_Byte(0xAF, OLED_CMD); //--turn on oled panel
+
+    //    OLED_WR_Byte(0xAF, OLED_CMD); /*display ON*/
+    //    OLED_Clear();
+    //    OLED_Set_Pos(0, 0);
 }
 
 

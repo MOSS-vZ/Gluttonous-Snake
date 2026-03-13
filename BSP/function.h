@@ -4,11 +4,13 @@
 #include "ti_msp_dl_config.h"
 
 #define initial_length 20
-#define left_boundary 1
-#define right_boundary 126
-#define upper_boundary 1
-#define lower_boundary 62
+#define left_boundary 2
+#define right_boundary 127
+#define upper_boundary 9
+#define lower_boundary 54
 #define seed 12345
+
+extern uint8_t score;
 
 typedef struct {
     uint8_t x;

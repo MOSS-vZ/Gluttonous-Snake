@@ -18,11 +18,18 @@ int main()
     boot_screen();
     delay_cycles(64000000);
     OLED_Clear();
-    choice_screen();
 
     bool is_key = 0;
+    bool is_first = 1;
     while (1)
     {
+        choice_screen();
+        if (is_first)
+        {
+            OLED_Refresh();
+            is_first = 0;
+        }
+
         char key = KeySCInput();
         if (key && !is_key)
         {
@@ -31,8 +38,9 @@ int main()
             {
             case 'A':
                 game();
+                OLED_Clear();
+                is_first = 1;
                 break;
-
             default:
                 break;
             }
