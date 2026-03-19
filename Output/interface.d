@@ -75,4 +75,4 @@
   ..\Source\ti\driverlib\dl_vref.h ..\Source\ti\driverlib\dl_wwdt.h \
   ..\Source\ti\driverlib\m0p\dl_interrupt.h \
   ..\Source\ti\driverlib\m0p\dl_systick.h ..\BSP\oled_spi_V0.2.h \
-  ..\BSP\function.h
+  ..\BSP\function.h ..\BSP\Keyboard.h

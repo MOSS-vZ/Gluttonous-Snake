@@ -47,7 +47,9 @@ void game()
             switch (key)
             {
             case '#':
-                pause_screen();
+                DL_Timer_stopCounter(TIMER_0_INST);//停止定时器
+                pause_screen(snake, food, len);
+                DL_Timer_startCounter(TIMER_0_INST);//启动定时器
                 break;
             case '*':
                 is_over = 1;

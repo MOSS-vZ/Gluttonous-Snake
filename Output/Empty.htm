@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\Output\Empty.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\Output\Empty.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Fri Mar 13 22:04:13 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Thu Mar 19 21:41:35 2026
 <BR><P>
 <H3>Maximum Stack Usage =        208 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -514,6 +514,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;game
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pause_screen
 </UL>
 
 <P><STRONG><a name="[46]"></a>OLED_Clear</STRONG> (Thumb, 356 bytes, Stack size 24 bytes, oled_spi_v0.2.o(.text.OLED_Clear))
@@ -538,6 +539,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;food_generator
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;snake_init
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pause_screen
 </UL>
 
 <P><STRONG><a name="[48]"></a>OLED_Init</STRONG> (Thumb, 1982 bytes, Stack size 32 bytes, oled_spi_v0.2.o(.text.OLED_Init))
@@ -558,13 +560,15 @@ Global Symbols
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;food_generator
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;snake_init
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pause_screen
 <LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prompt_screen
 </UL>
 
 <P><STRONG><a name="[5b]"></a>OLED_ShowCHinese</STRONG> (Thumb, 704 bytes, Stack size 40 bytes, oled_spi_v0.2.o(.text.OLED_ShowCHinese))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = OLED_ShowCHinese
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;choice_screen
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pause_screen
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;choice_screen
 <LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;boot_screen
 </UL>
 
@@ -577,7 +581,8 @@ Global Symbols
 <P><STRONG><a name="[4d]"></a>OLED_ShowChar</STRONG> (Thumb, 724 bytes, Stack size 40 bytes, oled_spi_v0.2.o(.text.OLED_ShowChar))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = OLED_ShowChar
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;choice_screen
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pause_screen
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;choice_screen
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_ShowNum
 </UL>
 
@@ -699,7 +704,7 @@ Global Symbols
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;game
 </UL>
 
-<P><STRONG><a name="[63]"></a>game</STRONG> (Thumb, 240 bytes, Stack size 24 bytes, function.o(.text.game))
+<P><STRONG><a name="[63]"></a>game</STRONG> (Thumb, 272 bytes, Stack size 24 bytes, function.o(.text.game))
 <BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = game &rArr; move &rArr; prompt_screen &rArr; OLED_ShowNum &rArr; OLED_ShowChar
 </UL>
 <BR>[Calls]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move
@@ -742,8 +747,16 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;game
 </UL>
 
-<P><STRONG><a name="[67]"></a>pause_screen</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, interface.o(.text.pause_screen))
-<BR><BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;game
+<P><STRONG><a name="[67]"></a>pause_screen</STRONG> (Thumb, 350 bytes, Stack size 64 bytes, interface.o(.text.pause_screen))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = pause_screen &rArr; KeySCInput
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_DrawPoint
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_Refresh
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_ShowCHinese
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_ShowChar
+<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;KeySCInput
+</UL>
+<BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;game
 </UL>
 
 <P><STRONG><a name="[65]"></a>prompt_screen</STRONG> (Thumb, 172 bytes, Stack size 40 bytes, interface.o(.text.prompt_screen))

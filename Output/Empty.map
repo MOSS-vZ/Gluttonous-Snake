@@ -66,6 +66,11 @@ Section Cross References
     interface.o(.text.prompt_screen) refers to oled_spi_v0.2.o(.text.OLED_Refresh) for OLED_Refresh
     interface.o(.text.prompt_screen) refers to function.o(.bss.score) for score
     interface.o(.ARM.exidx.text.prompt_screen) refers to interface.o(.text.prompt_screen) for [Anonymous Symbol]
+    interface.o(.text.pause_screen) refers to oled_spi_v0.2.o(.text.OLED_DrawPoint) for OLED_DrawPoint
+    interface.o(.text.pause_screen) refers to oled_spi_v0.2.o(.text.OLED_Refresh) for OLED_Refresh
+    interface.o(.text.pause_screen) refers to oled_spi_v0.2.o(.text.OLED_ShowCHinese) for OLED_ShowCHinese
+    interface.o(.text.pause_screen) refers to oled_spi_v0.2.o(.text.OLED_ShowChar) for OLED_ShowChar
+    interface.o(.text.pause_screen) refers to keyboard.o(.text.KeySCInput) for KeySCInput
     interface.o(.ARM.exidx.text.pause_screen) refers to interface.o(.text.pause_screen) for [Anonymous Symbol]
     function.o(.text.game) refers to oled_spi_v0.2.o(.text.OLED_Clear) for OLED_Clear
     function.o(.text.game) refers to function.o(.text.snake_init) for snake_init
@@ -1823,36 +1828,38 @@ Image Symbol Table
     [Anonymous Symbol]                       0x000022f4   Section        0  function.o(.text.food_generator)
     [Anonymous Symbol]                       0x000024a4   Section        0  interface.o(.text.frame_screen)
     [Anonymous Symbol]                       0x000024f8   Section        0  function.o(.text.game)
-    __arm_cp.0_0                             0x000025e8   Number         4  function.o(.text.game)
-    __arm_cp.0_1                             0x000025ec   Number         4  function.o(.text.game)
-    __arm_cp.0_2                             0x000025f0   Number         4  function.o(.text.game)
-    __arm_cp.0_4                             0x000025f4   Number         4  function.o(.text.game)
-    __arm_cp.0_5                             0x000025f8   Number         4  function.o(.text.game)
-    [Anonymous Symbol]                       0x000025fc   Section        0  main.o(.text.main)
-    __arm_cp.0_0                             0x00002658   Number         4  main.o(.text.main)
-    __arm_cp.0_1                             0x0000265c   Number         4  main.o(.text.main)
-    __arm_cp.0_2                             0x00002660   Number         4  main.o(.text.main)
-    [Anonymous Symbol]                       0x00002664   Section        0  function.o(.text.move)
-    __arm_cp.1_0                             0x000027c0   Number         4  function.o(.text.move)
-    __arm_cp.1_1                             0x000027c4   Number         4  function.o(.text.move)
-    __arm_cp.1_2                             0x000027c8   Number         4  function.o(.text.move)
-    [Anonymous Symbol]                       0x000027fc   Section        0  interface.o(.text.pause_screen)
-    [Anonymous Symbol]                       0x00002800   Section        0  interface.o(.text.prompt_screen)
-    __arm_cp.3_0                             0x000028ac   Number         4  interface.o(.text.prompt_screen)
-    [Anonymous Symbol]                       0x000028b0   Section        0  function.o(.text.snake_init)
-    __arm_cp.3_0                             0x000029bc   Number         4  function.o(.text.snake_init)
-    __arm_cp.3_1                             0x000029c0   Number         4  function.o(.text.snake_init)
-    .text_divfast                            0x000029c4   Section      502  aeabi_sdivfast.o(.text_divfast)
-    gSPI_0_clockConfig                       0x00003da2   Data           2  ti_msp_dl_config.o(.rodata.gSPI_0_clockConfig)
-    [Anonymous Symbol]                       0x00003da2   Section        0  ti_msp_dl_config.o(.rodata.gSPI_0_clockConfig)
-    gSPI_0_config                            0x00003da4   Data          10  ti_msp_dl_config.o(.rodata.gSPI_0_config)
-    [Anonymous Symbol]                       0x00003da4   Section        0  ti_msp_dl_config.o(.rodata.gSPI_0_config)
-    gSYSPLLConfig                            0x00003db0   Data          40  ti_msp_dl_config.o(.rodata.gSYSPLLConfig)
-    [Anonymous Symbol]                       0x00003db0   Section        0  ti_msp_dl_config.o(.rodata.gSYSPLLConfig)
-    gTIMER_0ClockConfig                      0x00003dd8   Data           3  ti_msp_dl_config.o(.rodata.gTIMER_0ClockConfig)
-    [Anonymous Symbol]                       0x00003dd8   Section        0  ti_msp_dl_config.o(.rodata.gTIMER_0ClockConfig)
-    gTIMER_0TimerConfig                      0x00003ddc   Data          20  ti_msp_dl_config.o(.rodata.gTIMER_0TimerConfig)
-    [Anonymous Symbol]                       0x00003ddc   Section        0  ti_msp_dl_config.o(.rodata.gTIMER_0TimerConfig)
+    __arm_cp.0_0                             0x00002608   Number         4  function.o(.text.game)
+    __arm_cp.0_1                             0x0000260c   Number         4  function.o(.text.game)
+    __arm_cp.0_2                             0x00002610   Number         4  function.o(.text.game)
+    __arm_cp.0_3                             0x00002614   Number         4  function.o(.text.game)
+    __arm_cp.0_4                             0x00002618   Number         4  function.o(.text.game)
+    __arm_cp.0_5                             0x0000261c   Number         4  function.o(.text.game)
+    __arm_cp.0_8                             0x00002620   Number         4  function.o(.text.game)
+    [Anonymous Symbol]                       0x00002624   Section        0  main.o(.text.main)
+    __arm_cp.0_0                             0x00002680   Number         4  main.o(.text.main)
+    __arm_cp.0_1                             0x00002684   Number         4  main.o(.text.main)
+    __arm_cp.0_2                             0x00002688   Number         4  main.o(.text.main)
+    [Anonymous Symbol]                       0x0000268c   Section        0  function.o(.text.move)
+    __arm_cp.1_0                             0x000027e8   Number         4  function.o(.text.move)
+    __arm_cp.1_1                             0x000027ec   Number         4  function.o(.text.move)
+    __arm_cp.1_2                             0x000027f0   Number         4  function.o(.text.move)
+    __arm_cp.1_5                             0x00002824   Number         4  function.o(.text.move)
+    [Anonymous Symbol]                       0x00002828   Section        0  interface.o(.text.pause_screen)
+    [Anonymous Symbol]                       0x00002988   Section        0  interface.o(.text.prompt_screen)
+    [Anonymous Symbol]                       0x00002a34   Section        0  function.o(.text.snake_init)
+    __arm_cp.3_0                             0x00002b40   Number         4  function.o(.text.snake_init)
+    __arm_cp.3_1                             0x00002b44   Number         4  function.o(.text.snake_init)
+    .text_divfast                            0x00002b48   Section      502  aeabi_sdivfast.o(.text_divfast)
+    gSPI_0_clockConfig                       0x00004046   Data           2  ti_msp_dl_config.o(.rodata.gSPI_0_clockConfig)
+    [Anonymous Symbol]                       0x00004046   Section        0  ti_msp_dl_config.o(.rodata.gSPI_0_clockConfig)
+    gSPI_0_config                            0x00004048   Data          10  ti_msp_dl_config.o(.rodata.gSPI_0_config)
+    [Anonymous Symbol]                       0x00004048   Section        0  ti_msp_dl_config.o(.rodata.gSPI_0_config)
+    gSYSPLLConfig                            0x00004054   Data          40  ti_msp_dl_config.o(.rodata.gSYSPLLConfig)
+    [Anonymous Symbol]                       0x00004054   Section        0  ti_msp_dl_config.o(.rodata.gSYSPLLConfig)
+    gTIMER_0ClockConfig                      0x0000407c   Data           3  ti_msp_dl_config.o(.rodata.gTIMER_0ClockConfig)
+    [Anonymous Symbol]                       0x0000407c   Section        0  ti_msp_dl_config.o(.rodata.gTIMER_0ClockConfig)
+    gTIMER_0TimerConfig                      0x00004080   Data          20  ti_msp_dl_config.o(.rodata.gTIMER_0TimerConfig)
+    [Anonymous Symbol]                       0x00004080   Section        0  ti_msp_dl_config.o(.rodata.gTIMER_0TimerConfig)
     .bss                                     0x20200060   Section      228  rand.o(.bss)
     .bss                                     0x20200144   Section       96  libspace.o(.bss)
     Heap_Mem                                 0x20200778   Data           0  startup_mspm0g351x_uvision.o(HEAP)
@@ -2043,20 +2050,20 @@ Image Symbol Table
     choice_screen                            0x000022b1   Thumb Code    68  interface.o(.text.choice_screen)
     food_generator                           0x000022f5   Thumb Code   432  function.o(.text.food_generator)
     frame_screen                             0x000024a5   Thumb Code    82  interface.o(.text.frame_screen)
-    game                                     0x000024f9   Thumb Code   240  function.o(.text.game)
-    main                                     0x000025fd   Thumb Code    92  main.o(.text.main)
-    move                                     0x00002665   Thumb Code   348  function.o(.text.move)
-    pause_screen                             0x000027fd   Thumb Code     2  interface.o(.text.pause_screen)
-    prompt_screen                            0x00002801   Thumb Code   172  interface.o(.text.prompt_screen)
-    snake_init                               0x000028b1   Thumb Code   268  function.o(.text.snake_init)
-    __aeabi_uidiv                            0x000029c5   Thumb Code    68  aeabi_sdivfast.o(.text_divfast)
-    __aeabi_idiv                             0x00002a09   Thumb Code   434  aeabi_sdivfast.o(.text_divfast)
-    F6x8                                     0x00002bba   Data         552  oled_spi_v0.2.o(.rodata.F6x8)
-    F8X16                                    0x00002de2   Data        1520  oled_spi_v0.2.o(.rodata.F8X16)
-    Hzk                                      0x000033d2   Data        2368  oled_spi_v0.2.o(.rodata.Hzk)
-    Hzk_small                                0x00003d12   Data         144  oled_spi_v0.2.o(.rodata.Hzk_small)
-    Region$$Table$$Base                      0x00003df0   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00003e10   Number         0  anon$$obj.o(Region$$Table)
+    game                                     0x000024f9   Thumb Code   272  function.o(.text.game)
+    main                                     0x00002625   Thumb Code    92  main.o(.text.main)
+    move                                     0x0000268d   Thumb Code   348  function.o(.text.move)
+    pause_screen                             0x00002829   Thumb Code   350  interface.o(.text.pause_screen)
+    prompt_screen                            0x00002989   Thumb Code   172  interface.o(.text.prompt_screen)
+    snake_init                               0x00002a35   Thumb Code   268  function.o(.text.snake_init)
+    __aeabi_uidiv                            0x00002b49   Thumb Code    68  aeabi_sdivfast.o(.text_divfast)
+    __aeabi_idiv                             0x00002b8d   Thumb Code   434  aeabi_sdivfast.o(.text_divfast)
+    F6x8                                     0x00002d3e   Data         552  oled_spi_v0.2.o(.rodata.F6x8)
+    F8X16                                    0x00002f66   Data        1520  oled_spi_v0.2.o(.rodata.F8X16)
+    Hzk                                      0x00003556   Data        2624  oled_spi_v0.2.o(.rodata.Hzk)
+    Hzk_small                                0x00003f96   Data         176  oled_spi_v0.2.o(.rodata.Hzk_small)
+    Region$$Table$$Base                      0x00004098   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x000040b8   Number         0  anon$$obj.o(Region$$Table)
     DL_FACTORYREGION_TrimTable               0x20200000   Data          68  dl_factoryregion.o(.TrimTable)
     FACTORYVALUE                             0x20200044   Data           4  dl_factoryregion.o(.data.FACTORYVALUE)
     keytonum                                 0x20200048   Data          17  keyboard.o(.data.keytonum)
@@ -2066,7 +2073,7 @@ Image Symbol Table
     OLED_GRAM                                0x202001a4   Data        1040  oled_spi_v0.2.o(.bss.OLED_GRAM)
     __temporary_stack_top$libspace           0x202001a4   Data           0  libspace.o(.bss)
     direction                                0x202005b4   Data           1  function.o(.bss.direction)
-    food                                     0x202005b5   Data           2  function.o(.bss.food)
+    food                                     0x202005b6   Data           2  function.o(.bss.food)
     gSPI_0Backup                             0x202005b8   Data          40  ti_msp_dl_config.o(.bss.gSPI_0Backup)
     gTIMER_0Backup                           0x202005e0   Data         188  ti_msp_dl_config.o(.bss.gTIMER_0Backup)
     gTRNGBackup                              0x2020069c   Data          16  ti_msp_dl_config.o(.bss.gTRNGBackup)
@@ -2083,87 +2090,87 @@ Memory Map of the image
 
   Image Entry point : 0x000000c1
 
-  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x00003e70, Max: 0x00080000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x00004118, Max: 0x00080000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00003e10, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000040b8, Max: 0x00080000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x00000000   0x00000000   0x000000c0   Data   RO         1016    RESET               startup_mspm0g351x_uvision.o
-    0x000000c0   0x000000c0   0x00000008   Code   RO         1046  * !!!main             c_p.l(__main.o)
-    0x000000c8   0x000000c8   0x00000054   Code   RO         1223    !!!scatter          c_p.l(__scatter.o)
+    0x00000000   0x00000000   0x000000c0   Data   RO         1017    RESET               startup_mspm0g351x_uvision.o
+    0x000000c0   0x000000c0   0x00000008   Code   RO         1047  * !!!main             c_p.l(__main.o)
+    0x000000c8   0x000000c8   0x00000054   Code   RO         1224    !!!scatter          c_p.l(__scatter.o)
     0x0000011c   0x0000011c   0x00000004   PAD
-    0x00000120   0x00000120   0x0000001a   Code   RO         1227    !!handler_copy      c_p.l(__scatter_copy.o)
+    0x00000120   0x00000120   0x0000001a   Code   RO         1228    !!handler_copy      c_p.l(__scatter_copy.o)
     0x0000013a   0x0000013a   0x00000006   PAD
-    0x00000140   0x00000140   0x00000002   Code   RO         1224    !!handler_null      c_p.l(__scatter.o)
+    0x00000140   0x00000140   0x00000002   Code   RO         1225    !!handler_null      c_p.l(__scatter.o)
     0x00000142   0x00000142   0x00000006   PAD
-    0x00000148   0x00000148   0x0000001c   Code   RO         1229    !!handler_zi        c_p.l(__scatter_zi.o)
-    0x00000164   0x00000164   0x00000002   Code   RO         1139    .ARM.Collect$$libinit$$00000000  c_p.l(libinit.o)
-    0x00000166   0x00000166   0x00000000   Code   RO         1054    .ARM.Collect$$libinit$$00000002  c_p.l(libinit2.o)
-    0x00000166   0x00000166   0x00000000   Code   RO         1056    .ARM.Collect$$libinit$$00000004  c_p.l(libinit2.o)
-    0x00000166   0x00000166   0x00000000   Code   RO         1058    .ARM.Collect$$libinit$$00000006  c_p.l(libinit2.o)
-    0x00000166   0x00000166   0x00000000   Code   RO         1061    .ARM.Collect$$libinit$$0000000C  c_p.l(libinit2.o)
-    0x00000166   0x00000166   0x00000000   Code   RO         1063    .ARM.Collect$$libinit$$0000000E  c_p.l(libinit2.o)
-    0x00000166   0x00000166   0x00000004   Code   RO         1064    .ARM.Collect$$libinit$$0000000F  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1065    .ARM.Collect$$libinit$$00000010  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1068    .ARM.Collect$$libinit$$00000013  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1070    .ARM.Collect$$libinit$$00000015  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1072    .ARM.Collect$$libinit$$00000017  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1074    .ARM.Collect$$libinit$$00000019  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1076    .ARM.Collect$$libinit$$0000001B  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1078    .ARM.Collect$$libinit$$0000001D  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1080    .ARM.Collect$$libinit$$0000001F  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1082    .ARM.Collect$$libinit$$00000021  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1084    .ARM.Collect$$libinit$$00000023  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1086    .ARM.Collect$$libinit$$00000025  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1088    .ARM.Collect$$libinit$$00000027  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1092    .ARM.Collect$$libinit$$0000002E  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1094    .ARM.Collect$$libinit$$00000030  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1096    .ARM.Collect$$libinit$$00000032  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000000   Code   RO         1098    .ARM.Collect$$libinit$$00000034  c_p.l(libinit2.o)
-    0x0000016a   0x0000016a   0x00000002   Code   RO         1099    .ARM.Collect$$libinit$$00000035  c_p.l(libinit2.o)
-    0x0000016c   0x0000016c   0x00000002   Code   RO         1190    .ARM.Collect$$libshutdown$$00000000  c_p.l(libshutdown.o)
-    0x0000016e   0x0000016e   0x00000000   Code   RO         1206    .ARM.Collect$$libshutdown$$00000002  c_p.l(libshutdown2.o)
-    0x0000016e   0x0000016e   0x00000000   Code   RO         1208    .ARM.Collect$$libshutdown$$00000004  c_p.l(libshutdown2.o)
-    0x0000016e   0x0000016e   0x00000000   Code   RO         1211    .ARM.Collect$$libshutdown$$00000007  c_p.l(libshutdown2.o)
-    0x0000016e   0x0000016e   0x00000000   Code   RO         1214    .ARM.Collect$$libshutdown$$0000000A  c_p.l(libshutdown2.o)
-    0x0000016e   0x0000016e   0x00000000   Code   RO         1216    .ARM.Collect$$libshutdown$$0000000C  c_p.l(libshutdown2.o)
-    0x0000016e   0x0000016e   0x00000000   Code   RO         1219    .ARM.Collect$$libshutdown$$0000000F  c_p.l(libshutdown2.o)
-    0x0000016e   0x0000016e   0x00000002   Code   RO         1220    .ARM.Collect$$libshutdown$$00000010  c_p.l(libshutdown2.o)
-    0x00000170   0x00000170   0x00000000   Code   RO         1048    .ARM.Collect$$rtentry$$00000000  c_p.l(__rtentry.o)
-    0x00000170   0x00000170   0x00000000   Code   RO         1101    .ARM.Collect$$rtentry$$00000002  c_p.l(__rtentry2.o)
-    0x00000170   0x00000170   0x00000006   Code   RO         1113    .ARM.Collect$$rtentry$$00000004  c_p.l(__rtentry4.o)
-    0x00000176   0x00000176   0x00000000   Code   RO         1103    .ARM.Collect$$rtentry$$00000009  c_p.l(__rtentry2.o)
-    0x00000176   0x00000176   0x00000004   Code   RO         1104    .ARM.Collect$$rtentry$$0000000A  c_p.l(__rtentry2.o)
-    0x0000017a   0x0000017a   0x00000000   Code   RO         1106    .ARM.Collect$$rtentry$$0000000C  c_p.l(__rtentry2.o)
-    0x0000017a   0x0000017a   0x00000008   Code   RO         1107    .ARM.Collect$$rtentry$$0000000D  c_p.l(__rtentry2.o)
-    0x00000182   0x00000182   0x00000002   Code   RO         1148    .ARM.Collect$$rtexit$$00000000  c_p.l(rtexit.o)
-    0x00000184   0x00000184   0x00000000   Code   RO         1170    .ARM.Collect$$rtexit$$00000002  c_p.l(rtexit2.o)
-    0x00000184   0x00000184   0x00000004   Code   RO         1171    .ARM.Collect$$rtexit$$00000003  c_p.l(rtexit2.o)
-    0x00000188   0x00000188   0x00000006   Code   RO         1172    .ARM.Collect$$rtexit$$00000004  c_p.l(rtexit2.o)
+    0x00000148   0x00000148   0x0000001c   Code   RO         1230    !!handler_zi        c_p.l(__scatter_zi.o)
+    0x00000164   0x00000164   0x00000002   Code   RO         1140    .ARM.Collect$$libinit$$00000000  c_p.l(libinit.o)
+    0x00000166   0x00000166   0x00000000   Code   RO         1055    .ARM.Collect$$libinit$$00000002  c_p.l(libinit2.o)
+    0x00000166   0x00000166   0x00000000   Code   RO         1057    .ARM.Collect$$libinit$$00000004  c_p.l(libinit2.o)
+    0x00000166   0x00000166   0x00000000   Code   RO         1059    .ARM.Collect$$libinit$$00000006  c_p.l(libinit2.o)
+    0x00000166   0x00000166   0x00000000   Code   RO         1062    .ARM.Collect$$libinit$$0000000C  c_p.l(libinit2.o)
+    0x00000166   0x00000166   0x00000000   Code   RO         1064    .ARM.Collect$$libinit$$0000000E  c_p.l(libinit2.o)
+    0x00000166   0x00000166   0x00000004   Code   RO         1065    .ARM.Collect$$libinit$$0000000F  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1066    .ARM.Collect$$libinit$$00000010  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1069    .ARM.Collect$$libinit$$00000013  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1071    .ARM.Collect$$libinit$$00000015  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1073    .ARM.Collect$$libinit$$00000017  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1075    .ARM.Collect$$libinit$$00000019  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1077    .ARM.Collect$$libinit$$0000001B  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1079    .ARM.Collect$$libinit$$0000001D  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1081    .ARM.Collect$$libinit$$0000001F  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1083    .ARM.Collect$$libinit$$00000021  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1085    .ARM.Collect$$libinit$$00000023  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1087    .ARM.Collect$$libinit$$00000025  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1089    .ARM.Collect$$libinit$$00000027  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1093    .ARM.Collect$$libinit$$0000002E  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1095    .ARM.Collect$$libinit$$00000030  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1097    .ARM.Collect$$libinit$$00000032  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000000   Code   RO         1099    .ARM.Collect$$libinit$$00000034  c_p.l(libinit2.o)
+    0x0000016a   0x0000016a   0x00000002   Code   RO         1100    .ARM.Collect$$libinit$$00000035  c_p.l(libinit2.o)
+    0x0000016c   0x0000016c   0x00000002   Code   RO         1191    .ARM.Collect$$libshutdown$$00000000  c_p.l(libshutdown.o)
+    0x0000016e   0x0000016e   0x00000000   Code   RO         1207    .ARM.Collect$$libshutdown$$00000002  c_p.l(libshutdown2.o)
+    0x0000016e   0x0000016e   0x00000000   Code   RO         1209    .ARM.Collect$$libshutdown$$00000004  c_p.l(libshutdown2.o)
+    0x0000016e   0x0000016e   0x00000000   Code   RO         1212    .ARM.Collect$$libshutdown$$00000007  c_p.l(libshutdown2.o)
+    0x0000016e   0x0000016e   0x00000000   Code   RO         1215    .ARM.Collect$$libshutdown$$0000000A  c_p.l(libshutdown2.o)
+    0x0000016e   0x0000016e   0x00000000   Code   RO         1217    .ARM.Collect$$libshutdown$$0000000C  c_p.l(libshutdown2.o)
+    0x0000016e   0x0000016e   0x00000000   Code   RO         1220    .ARM.Collect$$libshutdown$$0000000F  c_p.l(libshutdown2.o)
+    0x0000016e   0x0000016e   0x00000002   Code   RO         1221    .ARM.Collect$$libshutdown$$00000010  c_p.l(libshutdown2.o)
+    0x00000170   0x00000170   0x00000000   Code   RO         1049    .ARM.Collect$$rtentry$$00000000  c_p.l(__rtentry.o)
+    0x00000170   0x00000170   0x00000000   Code   RO         1102    .ARM.Collect$$rtentry$$00000002  c_p.l(__rtentry2.o)
+    0x00000170   0x00000170   0x00000006   Code   RO         1114    .ARM.Collect$$rtentry$$00000004  c_p.l(__rtentry4.o)
+    0x00000176   0x00000176   0x00000000   Code   RO         1104    .ARM.Collect$$rtentry$$00000009  c_p.l(__rtentry2.o)
+    0x00000176   0x00000176   0x00000004   Code   RO         1105    .ARM.Collect$$rtentry$$0000000A  c_p.l(__rtentry2.o)
+    0x0000017a   0x0000017a   0x00000000   Code   RO         1107    .ARM.Collect$$rtentry$$0000000C  c_p.l(__rtentry2.o)
+    0x0000017a   0x0000017a   0x00000008   Code   RO         1108    .ARM.Collect$$rtentry$$0000000D  c_p.l(__rtentry2.o)
+    0x00000182   0x00000182   0x00000002   Code   RO         1149    .ARM.Collect$$rtexit$$00000000  c_p.l(rtexit.o)
+    0x00000184   0x00000184   0x00000000   Code   RO         1171    .ARM.Collect$$rtexit$$00000002  c_p.l(rtexit2.o)
+    0x00000184   0x00000184   0x00000004   Code   RO         1172    .ARM.Collect$$rtexit$$00000003  c_p.l(rtexit2.o)
+    0x00000188   0x00000188   0x00000006   Code   RO         1173    .ARM.Collect$$rtexit$$00000004  c_p.l(rtexit2.o)
     0x0000018e   0x0000018e   0x00000002   PAD
-    0x00000190   0x00000190   0x00000038   Code   RO         1025    .emb_text           c_p.l(rand.o)
-    0x000001c8   0x000001c8   0x0000002c   Code   RO         1017    .text               startup_mspm0g351x_uvision.o
-    0x000001f4   0x000001f4   0x0000003c   Code   RO         1026    .text               c_p.l(rand.o)
-    0x00000230   0x00000230   0x00000040   Code   RO         1034    .text               c_p.l(rt_memclr.o)
-    0x00000270   0x00000270   0x000001f8   Code   RO         1036    .text               c_p.l(aeabi_sdivfast.o)
-    0x00000468   0x00000468   0x00000006   Code   RO         1044    .text               c_p.l(heapauxi.o)
-    0x0000046e   0x0000046e   0x0000003e   Code   RO         1121    .text               c_p.l(sys_stackheap_outer.o)
-    0x000004ac   0x000004ac   0x00000010   Code   RO         1124    .text               c_p.l(exit.o)
-    0x000004bc   0x000004bc   0x00000008   Code   RO         1144    .text               c_p.l(libspace.o)
-    0x000004c4   0x000004c4   0x0000000c   Code   RO         1162    .text               c_p.l(sys_exit.o)
-    0x000004d0   0x000004d0   0x00000002   Code   RO         1166    .text               c_p.l(use_no_semi.o)
-    0x000004d2   0x000004d2   0x00000000   Code   RO         1168    .text               c_p.l(indicate_semi.o)
-    0x000004d2   0x000004d2   0x0000000a   Code   RO          250    .text.DL_Common_delayCycles  dl_common.o
-    0x000004dc   0x000004dc   0x00000054   Code   RO          956    .text.DL_FactoryRegion_initTrimTable  dl_factoryregion.o
-    0x00000530   0x00000530   0x00000044   Code   RO          725    .text.DL_SPI_init   dl_spi.o
-    0x00000574   0x00000574   0x00000012   Code   RO          727    .text.DL_SPI_setClockConfig  dl_spi.o
+    0x00000190   0x00000190   0x00000038   Code   RO         1026    .emb_text           c_p.l(rand.o)
+    0x000001c8   0x000001c8   0x0000002c   Code   RO         1018    .text               startup_mspm0g351x_uvision.o
+    0x000001f4   0x000001f4   0x0000003c   Code   RO         1027    .text               c_p.l(rand.o)
+    0x00000230   0x00000230   0x00000040   Code   RO         1035    .text               c_p.l(rt_memclr.o)
+    0x00000270   0x00000270   0x000001f8   Code   RO         1037    .text               c_p.l(aeabi_sdivfast.o)
+    0x00000468   0x00000468   0x00000006   Code   RO         1045    .text               c_p.l(heapauxi.o)
+    0x0000046e   0x0000046e   0x0000003e   Code   RO         1122    .text               c_p.l(sys_stackheap_outer.o)
+    0x000004ac   0x000004ac   0x00000010   Code   RO         1125    .text               c_p.l(exit.o)
+    0x000004bc   0x000004bc   0x00000008   Code   RO         1145    .text               c_p.l(libspace.o)
+    0x000004c4   0x000004c4   0x0000000c   Code   RO         1163    .text               c_p.l(sys_exit.o)
+    0x000004d0   0x000004d0   0x00000002   Code   RO         1167    .text               c_p.l(use_no_semi.o)
+    0x000004d2   0x000004d2   0x00000000   Code   RO         1169    .text               c_p.l(indicate_semi.o)
+    0x000004d2   0x000004d2   0x0000000a   Code   RO          251    .text.DL_Common_delayCycles  dl_common.o
+    0x000004dc   0x000004dc   0x00000054   Code   RO          957    .text.DL_FactoryRegion_initTrimTable  dl_factoryregion.o
+    0x00000530   0x00000530   0x00000044   Code   RO          726    .text.DL_SPI_init   dl_spi.o
+    0x00000574   0x00000574   0x00000012   Code   RO          728    .text.DL_SPI_setClockConfig  dl_spi.o
     0x00000586   0x00000586   0x00000002   PAD
-    0x00000588   0x00000588   0x00000100   Code   RO          979    .text.DL_SYSCTL_configSYSPLL  dl_sysctl_mspm0gx51x.o
-    0x00000688   0x00000688   0x0000008c   Code   RO          993    .text.DL_SYSCTL_setHFCLKSourceHFXTParams  dl_sysctl_mspm0gx51x.o
-    0x00000714   0x00000714   0x00000050   Code   RO          987    .text.DL_SYSCTL_switchMCLKfromSYSOSCtoHSCLK  dl_sysctl_mspm0gx51x.o
-    0x00000764   0x00000764   0x00000100   Code   RO          784    .text.DL_Timer_initTimerMode  dl_timer.o
-    0x00000864   0x00000864   0x0000001c   Code   RO          780    .text.DL_Timer_setClockConfig  dl_timer.o
+    0x00000588   0x00000588   0x00000100   Code   RO          980    .text.DL_SYSCTL_configSYSPLL  dl_sysctl_mspm0gx51x.o
+    0x00000688   0x00000688   0x0000008c   Code   RO          994    .text.DL_SYSCTL_setHFCLKSourceHFXTParams  dl_sysctl_mspm0gx51x.o
+    0x00000714   0x00000714   0x00000050   Code   RO          988    .text.DL_SYSCTL_switchMCLKfromSYSOSCtoHSCLK  dl_sysctl_mspm0gx51x.o
+    0x00000764   0x00000764   0x00000100   Code   RO          785    .text.DL_Timer_initTimerMode  dl_timer.o
+    0x00000864   0x00000864   0x0000001c   Code   RO          781    .text.DL_Timer_setClockConfig  dl_timer.o
     0x00000880   0x00000880   0x00000210   Code   RO            4    .text.KeySCInput    keyboard.o
     0x00000a90   0x00000a90   0x00000164   Code   RO           23    .text.OLED_Clear    oled_spi_v0.2.o
     0x00000bf4   0x00000bf4   0x000000d8   Code   RO           51    .text.OLED_DrawLine  oled_spi_v0.2.o
@@ -2176,69 +2183,70 @@ Memory Map of the image
     0x00001a78   0x00001a78   0x000002e0   Code   RO           25    .text.OLED_ShowChar  oled_spi_v0.2.o
     0x00001d58   0x00001d58   0x00000054   Code   RO           27    .text.OLED_ShowChar_small  oled_spi_v0.2.o
     0x00001dac   0x00001dac   0x000001e8   Code   RO           31    .text.OLED_ShowNum  oled_spi_v0.2.o
-    0x00001f94   0x00001f94   0x00000108   Code   RO          137    .text.SYSCFG_DL_GPIO_init  ti_msp_dl_config.o
-    0x0000209c   0x0000209c   0x0000004c   Code   RO          143    .text.SYSCFG_DL_SPI_0_init  ti_msp_dl_config.o
-    0x000020e8   0x000020e8   0x00000090   Code   RO          139    .text.SYSCFG_DL_SYSCTL_init  ti_msp_dl_config.o
-    0x00002178   0x00002178   0x00000038   Code   RO          141    .text.SYSCFG_DL_TIMER_0_init  ti_msp_dl_config.o
-    0x000021b0   0x000021b0   0x00000044   Code   RO          145    .text.SYSCFG_DL_TRNG_init  ti_msp_dl_config.o
-    0x000021f4   0x000021f4   0x0000003c   Code   RO          133    .text.SYSCFG_DL_init  ti_msp_dl_config.o
-    0x00002230   0x00002230   0x00000054   Code   RO          135    .text.SYSCFG_DL_initPower  ti_msp_dl_config.o
-    0x00002284   0x00002284   0x00000008   Code   RO          105    .text.TIMA0_IRQHandler  function.o
+    0x00001f94   0x00001f94   0x00000108   Code   RO          138    .text.SYSCFG_DL_GPIO_init  ti_msp_dl_config.o
+    0x0000209c   0x0000209c   0x0000004c   Code   RO          144    .text.SYSCFG_DL_SPI_0_init  ti_msp_dl_config.o
+    0x000020e8   0x000020e8   0x00000090   Code   RO          140    .text.SYSCFG_DL_SYSCTL_init  ti_msp_dl_config.o
+    0x00002178   0x00002178   0x00000038   Code   RO          142    .text.SYSCFG_DL_TIMER_0_init  ti_msp_dl_config.o
+    0x000021b0   0x000021b0   0x00000044   Code   RO          146    .text.SYSCFG_DL_TRNG_init  ti_msp_dl_config.o
+    0x000021f4   0x000021f4   0x0000003c   Code   RO          134    .text.SYSCFG_DL_init  ti_msp_dl_config.o
+    0x00002230   0x00002230   0x00000054   Code   RO          136    .text.SYSCFG_DL_initPower  ti_msp_dl_config.o
+    0x00002284   0x00002284   0x00000008   Code   RO          106    .text.TIMA0_IRQHandler  function.o
     0x0000228c   0x0000228c   0x00000024   Code   RO           70    .text.boot_screen   interface.o
     0x000022b0   0x000022b0   0x00000044   Code   RO           72    .text.choice_screen  interface.o
-    0x000022f4   0x000022f4   0x000001b0   Code   RO           95    .text.food_generator  function.o
+    0x000022f4   0x000022f4   0x000001b0   Code   RO           96    .text.food_generator  function.o
     0x000024a4   0x000024a4   0x00000052   Code   RO           74    .text.frame_screen  interface.o
     0x000024f6   0x000024f6   0x00000002   PAD
-    0x000024f8   0x000024f8   0x00000104   Code   RO           87    .text.game          function.o
-    0x000025fc   0x000025fc   0x00000068   Code   RO          122    .text.main          main.o
-    0x00002664   0x00002664   0x00000198   Code   RO           89    .text.move          function.o
-    0x000027fc   0x000027fc   0x00000002   Code   RO           78    .text.pause_screen  interface.o
-    0x000027fe   0x000027fe   0x00000002   PAD
-    0x00002800   0x00002800   0x000000b0   Code   RO           76    .text.prompt_screen  interface.o
-    0x000028b0   0x000028b0   0x00000114   Code   RO           93    .text.snake_init    function.o
-    0x000029c4   0x000029c4   0x000001f6   Code   RO         1037    .text_divfast       c_p.l(aeabi_sdivfast.o)
-    0x00002bba   0x00002bba   0x00000228   Data   RO           57    .rodata.F6x8        oled_spi_v0.2.o
-    0x00002de2   0x00002de2   0x000005f0   Data   RO           58    .rodata.F8X16       oled_spi_v0.2.o
-    0x000033d2   0x000033d2   0x00000940   Data   RO           59    .rodata.Hzk         oled_spi_v0.2.o
-    0x00003d12   0x00003d12   0x00000090   Data   RO           60    .rodata.Hzk_small   oled_spi_v0.2.o
-    0x00003da2   0x00003da2   0x00000002   Data   RO          157    .rodata.gSPI_0_clockConfig  ti_msp_dl_config.o
-    0x00003da4   0x00003da4   0x0000000a   Data   RO          158    .rodata.gSPI_0_config  ti_msp_dl_config.o
-    0x00003dae   0x00003dae   0x00000002   PAD
-    0x00003db0   0x00003db0   0x00000028   Data   RO          154    .rodata.gSYSPLLConfig  ti_msp_dl_config.o
-    0x00003dd8   0x00003dd8   0x00000003   Data   RO          155    .rodata.gTIMER_0ClockConfig  ti_msp_dl_config.o
-    0x00003ddb   0x00003ddb   0x00000001   PAD
-    0x00003ddc   0x00003ddc   0x00000014   Data   RO          156    .rodata.gTIMER_0TimerConfig  ti_msp_dl_config.o
-    0x00003df0   0x00003df0   0x00000020   Data   RO         1222    Region$$Table       anon$$obj.o
+    0x000024f8   0x000024f8   0x0000012c   Code   RO           88    .text.game          function.o
+    0x00002624   0x00002624   0x00000068   Code   RO          123    .text.main          main.o
+    0x0000268c   0x0000268c   0x0000019c   Code   RO           90    .text.move          function.o
+    0x00002828   0x00002828   0x0000015e   Code   RO           78    .text.pause_screen  interface.o
+    0x00002986   0x00002986   0x00000002   PAD
+    0x00002988   0x00002988   0x000000ac   Code   RO           76    .text.prompt_screen  interface.o
+    0x00002a34   0x00002a34   0x00000114   Code   RO           94    .text.snake_init    function.o
+    0x00002b48   0x00002b48   0x000001f6   Code   RO         1038    .text_divfast       c_p.l(aeabi_sdivfast.o)
+    0x00002d3e   0x00002d3e   0x00000228   Data   RO           57    .rodata.F6x8        oled_spi_v0.2.o
+    0x00002f66   0x00002f66   0x000005f0   Data   RO           58    .rodata.F8X16       oled_spi_v0.2.o
+    0x00003556   0x00003556   0x00000a40   Data   RO           59    .rodata.Hzk         oled_spi_v0.2.o
+    0x00003f96   0x00003f96   0x000000b0   Data   RO           60    .rodata.Hzk_small   oled_spi_v0.2.o
+    0x00004046   0x00004046   0x00000002   Data   RO          158    .rodata.gSPI_0_clockConfig  ti_msp_dl_config.o
+    0x00004048   0x00004048   0x0000000a   Data   RO          159    .rodata.gSPI_0_config  ti_msp_dl_config.o
+    0x00004052   0x00004052   0x00000002   PAD
+    0x00004054   0x00004054   0x00000028   Data   RO          155    .rodata.gSYSPLLConfig  ti_msp_dl_config.o
+    0x0000407c   0x0000407c   0x00000003   Data   RO          156    .rodata.gTIMER_0ClockConfig  ti_msp_dl_config.o
+    0x0000407f   0x0000407f   0x00000001   PAD
+    0x00004080   0x00004080   0x00000014   Data   RO          157    .rodata.gTIMER_0TimerConfig  ti_msp_dl_config.o
+    0x00004094   0x00004094   0x00000004   PAD
+    0x00004098   0x00004098   0x00000020   Data   RO         1223    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20200000, Load base: 0x00003e10, Size: 0x00002778, Max: 0x00010000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20200000, Load base: 0x000040b8, Size: 0x00002778, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20200000   0x00003e10   0x00000044   Data   RW          958    .TrimTable          dl_factoryregion.o
-    0x20200044   0x00003e54   0x00000004   Data   RW          959    .data.FACTORYVALUE  dl_factoryregion.o
-    0x20200048   0x00003e58   0x00000011   Data   RW            6    .data.keytonum      keyboard.o
-    0x20200059   0x00003e69   0x00000001   Data   RW          107    .data.len           function.o
-    0x2020005a   0x00003e6a   0x00000006   PAD
-    0x20200060        -       0x000000e4   Zero   RW         1027    .bss                c_p.l(rand.o)
-    0x20200144        -       0x00000060   Zero   RW         1145    .bss                c_p.l(libspace.o)
+    0x20200000   0x000040b8   0x00000044   Data   RW          959    .TrimTable          dl_factoryregion.o
+    0x20200044   0x000040fc   0x00000004   Data   RW          960    .data.FACTORYVALUE  dl_factoryregion.o
+    0x20200048   0x00004100   0x00000011   Data   RW            6    .data.keytonum      keyboard.o
+    0x20200059   0x00004111   0x00000001   Data   RW          108    .data.len           function.o
+    0x2020005a   0x00004112   0x00000006   PAD
+    0x20200060        -       0x000000e4   Zero   RW         1028    .bss                c_p.l(rand.o)
+    0x20200144        -       0x00000060   Zero   RW         1146    .bss                c_p.l(libspace.o)
     0x202001a4        -       0x00000410   Zero   RW           61    .bss.OLED_GRAM      oled_spi_v0.2.o
-    0x202005b4        -       0x00000001   Zero   RW          111    .bss.direction      function.o
-    0x202005b5        -       0x00000002   Zero   RW          108    .bss.food           function.o
-    0x202005b7   0x00003e6a   0x00000001   PAD
-    0x202005b8        -       0x00000028   Zero   RW          152    .bss.gSPI_0Backup   ti_msp_dl_config.o
-    0x202005e0        -       0x000000bc   Zero   RW          151    .bss.gTIMER_0Backup  ti_msp_dl_config.o
-    0x2020069c        -       0x00000010   Zero   RW          153    .bss.gTRNGBackup    ti_msp_dl_config.o
-    0x202006ac        -       0x00000001   Zero   RW          109    .bss.is_over        function.o
-    0x202006ad        -       0x00000001   Zero   RW          110    .bss.is_time        function.o
-    0x202006ae        -       0x00000001   Zero   RW          112    .bss.score          function.o
-    0x202006af        -       0x000000c8   Zero   RW          113    .bss.snake          function.o
-    0x20200777   0x00003e6a   0x00000001   PAD
-    0x20200778        -       0x00000000   Zero   RW         1015    HEAP                startup_mspm0g351x_uvision.o
-    0x20200778        -       0x00002000   Zero   RW         1014    STACK               startup_mspm0g351x_uvision.o
+    0x202005b4        -       0x00000001   Zero   RW          112    .bss.direction      function.o
+    0x202005b5   0x00004112   0x00000001   PAD
+    0x202005b6        -       0x00000002   Zero   RW          109    .bss.food           function.o
+    0x202005b8        -       0x00000028   Zero   RW          153    .bss.gSPI_0Backup   ti_msp_dl_config.o
+    0x202005e0        -       0x000000bc   Zero   RW          152    .bss.gTIMER_0Backup  ti_msp_dl_config.o
+    0x2020069c        -       0x00000010   Zero   RW          154    .bss.gTRNGBackup    ti_msp_dl_config.o
+    0x202006ac        -       0x00000001   Zero   RW          110    .bss.is_over        function.o
+    0x202006ad        -       0x00000001   Zero   RW          111    .bss.is_time        function.o
+    0x202006ae        -       0x00000001   Zero   RW          113    .bss.score          function.o
+    0x202006af        -       0x000000c8   Zero   RW          114    .bss.snake          function.o
+    0x20200777   0x00004112   0x00000001   PAD
+    0x20200778        -       0x00000000   Zero   RW         1016    HEAP                startup_mspm0g351x_uvision.o
+    0x20200778        -       0x00002000   Zero   RW         1015    STACK               startup_mspm0g351x_uvision.o
 
 
-    Execution Region RW_IRAM2 (Exec base: 0x20210000, Load base: 0x00003e70, Size: 0x00000000, Max: 0x00010000, ABSOLUTE)
+    Execution Region RW_IRAM2 (Exec base: 0x20210000, Load base: 0x00004118, Size: 0x00000000, Max: 0x00010000, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
@@ -2279,18 +2287,18 @@ Image component sizes
         86          8          0          0          0      16294   dl_spi.o
        476         36          0          0          0      15551   dl_sysctl_mspm0gx51x.o
        284        160          0          0          0      39012   dl_timer.o
-      1384         88          0          1        206       9148   function.o
-       364          4          0          0          0        887   interface.o
+      1428        100          0          1        206       9231   function.o
+       708          0          0          0          0       2136   interface.o
        528         12          0         17          0       7278   keyboard.o
        104         12          0          0          0       2546   main.o
-      5378         80       4584          0       1040      63791   oled_spi_v0.2.o
+      5378         80       4872          0       1040      63791   oled_spi_v0.2.o
         44         18        192          0       8192        696   startup_mspm0g351x_uvision.o
        752        164         75          0        244      28227   ti_msp_dl_config.o
 
     ----------------------------------------------------------------------
-      9502        590       4886         92       9688     186192   Object Totals
+      9890        598       5178         92       9688     187524   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         8          0          3          2          6          0   (incl. Padding)
+         8          0          7          2          6          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -2340,15 +2348,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     11002        632       4886         92      10012     186720   Grand Totals
-     11002        632       4886         92      10012     186720   ELF Image Totals
-     11002        632       4886         92          0          0   ROM Totals
+     11390        640       5178         92      10012     188052   Grand Totals
+     11390        640       5178         92      10012     188052   ELF Image Totals
+     11390        640       5178         92          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                15888 (  15.52kB)
+    Total RO  Size (Code + RO Data)                16568 (  16.18kB)
     Total RW  Size (RW Data + ZI Data)             10104 (   9.87kB)
-    Total ROM Size (Code + RO Data + RW Data)      15980 (  15.61kB)
+    Total ROM Size (Code + RO Data + RW Data)      16660 (  16.27kB)
 
 ==============================================================================
 
