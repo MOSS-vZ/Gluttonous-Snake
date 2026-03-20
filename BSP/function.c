@@ -1,9 +1,4 @@
-#include "function.h"
-#include "ti_msp_dl_config.h"
-#include "interface.h"
-#include "Keyboard.h"
-#include <stdlib.h>
-#include <time.h>
+#include "bsp.h"
 
 uint8_t len = initial_length;
 p snake[100];//定义贪吃蛇
@@ -26,12 +21,17 @@ void game()
     bool is_key = 0;
     while (!is_over)
     {
+        // 生成食物
         if (!is_time)
         {
             food_generator();
             is_time = 1;
         }
+
+        // 移动蛇
         move();
+
+        // 判断是否吃到食物
         if (is_eat())
         {
             len++;
@@ -40,30 +40,56 @@ void game()
             DL_Timer_stopCounter(TIMER_0_INST);//停止定时器
             is_time = 0;
         }
+
+        // 键盘输入
         char key = KeySCInput();
         if (key && !is_key)
         {
             is_key = 1;
             switch (key)
             {
-            case '#':
+            case '#':           //暂停
                 DL_Timer_stopCounter(TIMER_0_INST);//停止定时器
                 pause_screen(snake, food, len);
                 DL_Timer_startCounter(TIMER_0_INST);//启动定时器
                 break;
-            case '*':
+            case '*':           //结束
                 is_over = 1;
                 break;
-            case '2':case '8':case '4':case '6':
+            case '2':case '8':case '4':case '6':    //上下左右
                 direction = key - '0';
                 break;
             default:
                 break;
             }
         }
-        else
+        else if (key == '\0')
             is_key = 0;
+
+        // UART输入
+        switch (received_byte)
+        {
+        case '#':
+            received_byte = '\0';
+            DL_Timer_stopCounter(TIMER_0_INST);         // 停止定时器
+            pause_screen(snake, food, len);
+            DL_Timer_startCounter(TIMER_0_INST);        // 启动定时器
+            break;
+        case '*':
+            received_byte = '\0';
+            is_over = 1;
+            break;
+        case '2':case '8':case '4':case '6':    //上下左右
+            direction = received_byte - '0';
+            received_byte = '\0';
+            break;
+        default:
+            break;
+        }
     }
+
+    // 游戏结束，重置状态
+    is_time = 0;
     is_over = 0;
     score = 0;
     direction = 0;
@@ -118,7 +144,8 @@ void snake_refresh(uint8_t length)
     //边界判断
     if (snake[0].x < left_boundary || snake[0].x >= right_boundary || snake[0].y < upper_boundary || snake[0].y >= lower_boundary)
     {
-        score -= 2;
+        if (score >= 2)
+            score -= 2;
         prompt_screen();
         // DL_GPIO_togglePins(LED_L1_PORT, LED_L1_PIN);
     }

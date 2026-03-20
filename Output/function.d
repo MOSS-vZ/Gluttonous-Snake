@@ -1,6 +1,5 @@
-../output/function.o: ..\BSP\function.c ..\BSP\function.h \
-  ..\User\ti_msp_dl_config.h ..\Source\ti\devices\msp\msp.h \
-  ..\Source\ti\devices\DeviceFamily.h \
+../output/function.o: ..\BSP\function.c ..\BSP\bsp.h \
+  ..\Source\ti\devices\msp\msp.h ..\Source\ti\devices\DeviceFamily.h \
   ..\Source\ti\devices\msp\m0p\mspm0g351x.h \
   D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdint.h \
   D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdbool.h \
@@ -74,7 +73,10 @@
   ..\Source\ti\driverlib\dl_unicommuart.h \
   ..\Source\ti\driverlib\dl_vref.h ..\Source\ti\driverlib\dl_wwdt.h \
   ..\Source\ti\driverlib\m0p\dl_interrupt.h \
-  ..\Source\ti\driverlib\m0p\dl_systick.h ..\BSP\interface.h \
-  ..\BSP\oled_spi_V0.2.h ..\BSP\Keyboard.h \
+  ..\Source\ti\driverlib\m0p\dl_systick.h \
+  D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdio.h \
+  D:\Keil\Keil_v5\ARM\ARMCLANG\include\string.h \
   D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdlib.h \
-  D:\Keil\Keil_v5\ARM\ARMCLANG\include\time.h
+  D:\Keil\Keil_v5\ARM\ARMCLANG\include\time.h ..\User\ti_msp_dl_config.h \
+  ..\BSP\Keyboard.h ..\BSP\oled_spi_V0.2.h ..\BSP\function.h \
+  ..\BSP\interface.h

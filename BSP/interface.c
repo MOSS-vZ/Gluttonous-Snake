@@ -1,7 +1,4 @@
-#include "interface.h"
-#include "Keyboard.h"
-#include "oled_spi_V0.2.h"
-#include "function.h"
+#include "bsp.h"
 
 void boot_screen()
 {
@@ -73,7 +70,7 @@ void pause_screen(p snake[], p food, int len)
     OLED_ShowCHinese(30, 4, 37);
     OLED_ShowCHinese(46, 4, 38);
     OLED_ShowCHinese(62, 4, 36);
-    OLED_ShowChar(80, 4, '#');
+    OLED_ShowChar(82, 4, '#');
 
     bool is_key = 1;
     bool is_over = 0;
@@ -111,6 +108,32 @@ void pause_screen(p snake[], p food, int len)
         else if (key == '\0')
         {
             is_key = 1;
+        }
+
+        switch (received_byte)
+        {
+        case '#':
+            received_byte = '\0';
+            // 将暂停界面点灭
+            for (int i = left_boundary - 1;i < right_boundary;i++)
+            {
+                for (int j = upper_boundary - 1;j < lower_boundary;j++)
+                    OLED_DrawPoint(i, j, 0);
+            }
+            // 重新绘制蛇和食物
+            for (int i = 0;i < len;i++)
+            {
+                OLED_DrawPoint(snake[i].x, snake[i].y, 1);
+            }
+            OLED_DrawPoint(food.x + 1, food.y, 1);
+            OLED_DrawPoint(food.x - 1, food.y, 1);
+            OLED_DrawPoint(food.x, food.y + 1, 1);
+            OLED_DrawPoint(food.x, food.y - 1, 1);
+            OLED_Refresh();
+            is_over = 1;
+            break;
+        default:
+            break;
         }
     }
 }

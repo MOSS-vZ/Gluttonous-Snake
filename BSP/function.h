@@ -1,7 +1,7 @@
 #ifndef FUNCTION_H
 #define FUNCTION_H
 
-#include "ti_msp_dl_config.h"
+#include "bsp.h"
 
 #define initial_length 20
 #define left_boundary 2

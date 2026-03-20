@@ -55,10 +55,13 @@ SYSCONFIG_WEAK void SYSCFG_DL_init(void)
     /* Module-Specific Initializations*/
     SYSCFG_DL_SYSCTL_init();
     SYSCFG_DL_TIMER_0_init();
+    SYSCFG_DL_UART_remote_init();
+    SYSCFG_DL_UART_interface_init();
     SYSCFG_DL_SPI_0_init();
     SYSCFG_DL_TRNG_init();
     /* Ensure backup structures have no valid state */
 	gTIMER_0Backup.backupRdy 	= false;
+
 	gSPI_0Backup.backupRdy 	= false;
 	gTRNGBackup.backupRdy 	= false;
 
@@ -96,6 +99,8 @@ SYSCONFIG_WEAK void SYSCFG_DL_initPower(void)
     DL_GPIO_reset(GPIOB);
     DL_GPIO_reset(GPIOC);
     DL_TimerA_reset(TIMER_0_INST);
+    DL_UART_Main_reset(UART_remote_INST);
+    DL_UART_Main_reset(UART_interface_INST);
     DL_SPI_reset(SPI_0_INST);
     DL_TRNG_reset(TRNG);
 
@@ -103,6 +108,8 @@ SYSCONFIG_WEAK void SYSCFG_DL_initPower(void)
     DL_GPIO_enablePower(GPIOB);
     DL_GPIO_enablePower(GPIOC);
     DL_TimerA_enablePower(TIMER_0_INST);
+    DL_UART_Main_enablePower(UART_remote_INST);
+    DL_UART_Main_enablePower(UART_interface_INST);
     DL_SPI_enablePower(SPI_0_INST);
     DL_TRNG_enablePower(TRNG);
     delay_cycles(POWER_STARTUP_DELAY);
@@ -113,6 +120,13 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
 
     DL_GPIO_initPeripheralAnalogFunction(GPIO_HFXIN_IOMUX);
     DL_GPIO_initPeripheralAnalogFunction(GPIO_HFXOUT_IOMUX);
+
+    DL_GPIO_initPeripheralInputFunction(
+        GPIO_UART_remote_IOMUX_RX, GPIO_UART_remote_IOMUX_RX_FUNC);
+    DL_GPIO_initPeripheralOutputFunction(
+        GPIO_UART_interface_IOMUX_TX, GPIO_UART_interface_IOMUX_TX_FUNC);
+    DL_GPIO_initPeripheralInputFunction(
+        GPIO_UART_interface_IOMUX_RX, GPIO_UART_interface_IOMUX_RX_FUNC);
 
     DL_GPIO_initPeripheralOutputFunction(
         GPIO_SPI_0_IOMUX_SCLK, GPIO_SPI_0_IOMUX_SCLK_FUNC);
@@ -349,6 +363,73 @@ SYSCONFIG_WEAK void SYSCFG_DL_TIMER_0_init(void) {
 
 }
 
+
+static const DL_UART_Main_ClockConfig gUART_remoteClockConfig = {
+    .clockSel    = DL_UART_MAIN_CLOCK_BUSCLK,
+    .divideRatio = DL_UART_MAIN_CLOCK_DIVIDE_RATIO_1
+};
+
+static const DL_UART_Main_Config gUART_remoteConfig = {
+    .mode        = DL_UART_MAIN_MODE_NORMAL,
+    .direction   = DL_UART_MAIN_DIRECTION_RX,
+    .flowControl = DL_UART_MAIN_FLOW_CONTROL_NONE,
+    .parity      = DL_UART_MAIN_PARITY_NONE,
+    .wordLength  = DL_UART_MAIN_WORD_LENGTH_8_BITS,
+    .stopBits    = DL_UART_MAIN_STOP_BITS_ONE
+};
+
+SYSCONFIG_WEAK void SYSCFG_DL_UART_remote_init(void)
+{
+    DL_UART_Main_setClockConfig(UART_remote_INST, (DL_UART_Main_ClockConfig *) &gUART_remoteClockConfig);
+
+    DL_UART_Main_init(UART_remote_INST, (DL_UART_Main_Config *) &gUART_remoteConfig);
+    /*
+     * Configure baud rate by setting oversampling and baud rate divisors.
+     *  Target baud rate: 115200
+     *  Actual baud rate: 115190.78
+     */
+    DL_UART_Main_setOversampling(UART_remote_INST, DL_UART_OVERSAMPLING_RATE_16X);
+    DL_UART_Main_setBaudRateDivisor(UART_remote_INST, UART_remote_IBRD_40_MHZ_115200_BAUD, UART_remote_FBRD_40_MHZ_115200_BAUD);
+
+
+    /* Configure Interrupts */
+    DL_UART_Main_enableInterrupt(UART_remote_INST,
+                                 DL_UART_MAIN_INTERRUPT_RX);
+
+
+    DL_UART_Main_enable(UART_remote_INST);
+}
+static const DL_UART_Main_ClockConfig gUART_interfaceClockConfig = {
+    .clockSel    = DL_UART_MAIN_CLOCK_BUSCLK,
+    .divideRatio = DL_UART_MAIN_CLOCK_DIVIDE_RATIO_1
+};
+
+static const DL_UART_Main_Config gUART_interfaceConfig = {
+    .mode        = DL_UART_MAIN_MODE_NORMAL,
+    .direction   = DL_UART_MAIN_DIRECTION_TX_RX,
+    .flowControl = DL_UART_MAIN_FLOW_CONTROL_NONE,
+    .parity      = DL_UART_MAIN_PARITY_NONE,
+    .wordLength  = DL_UART_MAIN_WORD_LENGTH_8_BITS,
+    .stopBits    = DL_UART_MAIN_STOP_BITS_ONE
+};
+
+SYSCONFIG_WEAK void SYSCFG_DL_UART_interface_init(void)
+{
+    DL_UART_Main_setClockConfig(UART_interface_INST, (DL_UART_Main_ClockConfig *) &gUART_interfaceClockConfig);
+
+    DL_UART_Main_init(UART_interface_INST, (DL_UART_Main_Config *) &gUART_interfaceConfig);
+    /*
+     * Configure baud rate by setting oversampling and baud rate divisors.
+     *  Target baud rate: 9600
+     *  Actual baud rate: 9599.81
+     */
+    DL_UART_Main_setOversampling(UART_interface_INST, DL_UART_OVERSAMPLING_RATE_16X);
+    DL_UART_Main_setBaudRateDivisor(UART_interface_INST, UART_interface_IBRD_40_MHZ_9600_BAUD, UART_interface_FBRD_40_MHZ_9600_BAUD);
+
+
+
+    DL_UART_Main_enable(UART_interface_INST);
+}
 
 static const DL_SPI_Config gSPI_0_config = {
     .mode        = DL_SPI_MODE_CONTROLLER,

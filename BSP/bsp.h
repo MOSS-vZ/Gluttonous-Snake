@@ -9,16 +9,22 @@
 #include <string.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <time.h>
 #include "math.h"
 #include "ti_msp_dl_config.h"
 /*******************************************/
-#define u8 uint8_t
-#define u32 unsigned int
+// #define u8 uint8_t
+// #define u32 unsigned int
 /******************用户自定义头文件*********/
 //#include "Default_Module/LED/led.h"
 #include "Keyboard.h"
 #include "oled_spi_V0.2.h"
+#include "function.h"
+#include "interface.h"
+// #include "oledpicture_V0.2.h"
 //#include "interface.h"
 /*******************************************/
+extern volatile uint8_t received_byte;
 
 #endif

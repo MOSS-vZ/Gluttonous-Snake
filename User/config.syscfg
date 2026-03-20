@@ -23,6 +23,9 @@ const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
 const TIMER         = scripting.addModule("/ti/driverlib/TIMER", {}, false);
 const TIMER1        = TIMER.addInstance();
 const TRNG          = scripting.addModule("/ti/driverlib/TRNG");
+const UART          = scripting.addModule("/ti/driverlib/UART", {}, false);
+const UART1         = UART.addInstance();
+const UART2         = UART.addInstance();
 const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
 
 /**
@@ -207,6 +210,27 @@ TIMER1.interrupts       = ["ZERO"];
 
 TRNG.clockDivider = "DL_TRNG_CLOCK_DIVIDE_8";
 
+UART1.$name                            = "UART_remote";
+UART1.targetBaudRate                   = 115200;
+UART1.enabledInterrupts                = ["RX"];
+UART1.direction                        = "RX";
+UART1.rxPinConfig.hideOutputInversion  = scripting.forceWrite(false);
+UART1.rxPinConfig.onlyInternalResistor = scripting.forceWrite(false);
+UART1.rxPinConfig.passedPeripheralType = scripting.forceWrite("Digital");
+UART1.rxPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric3";
+UART1.peripheral.rxPin.$assign         = "PA11";
+
+UART2.$name                            = "UART_interface";
+UART2.txPinConfig.direction            = scripting.forceWrite("OUTPUT");
+UART2.txPinConfig.hideOutputInversion  = scripting.forceWrite(false);
+UART2.txPinConfig.onlyInternalResistor = scripting.forceWrite(false);
+UART2.txPinConfig.passedPeripheralType = scripting.forceWrite("Digital");
+UART2.txPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric4";
+UART2.rxPinConfig.hideOutputInversion  = scripting.forceWrite(false);
+UART2.rxPinConfig.onlyInternalResistor = scripting.forceWrite(false);
+UART2.rxPinConfig.passedPeripheralType = scripting.forceWrite("Digital");
+UART2.rxPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric5";
+
 ProjectConfig.migrationCondition = true;
 ProjectConfig.genLibCMSIS        = true;
 
@@ -215,5 +239,9 @@ ProjectConfig.genLibCMSIS        = true;
  * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
  * re-solve from scratch.
  */
-SPI1.peripheral.$suggestSolution   = "SPI0";
-TIMER1.peripheral.$suggestSolution = "TIMA0";
+SPI1.peripheral.$suggestSolution        = "SPI0";
+TIMER1.peripheral.$suggestSolution      = "TIMA0";
+UART1.peripheral.$suggestSolution       = "UART0";
+UART2.peripheral.$suggestSolution       = "UART1";
+UART2.peripheral.rxPin.$suggestSolution = "PA18";
+UART2.peripheral.txPin.$suggestSolution = "PA3";

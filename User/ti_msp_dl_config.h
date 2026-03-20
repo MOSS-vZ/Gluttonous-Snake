@@ -90,6 +90,38 @@ extern "C" {
 
 
 
+/* Defines for UART_remote */
+#define UART_remote_INST                                                   UART0
+#define UART_remote_INST_FREQUENCY                                      40000000
+#define UART_remote_INST_IRQHandler                             UART0_IRQHandler
+#define UART_remote_INST_INT_IRQN                                 UART0_INT_IRQn
+#define GPIO_UART_remote_RX_PORT                                           GPIOA
+#define GPIO_UART_remote_RX_PIN                                   DL_GPIO_PIN_11
+#define GPIO_UART_remote_IOMUX_RX                                (IOMUX_PINCM22)
+#define GPIO_UART_remote_IOMUX_RX_FUNC                 IOMUX_PINCM22_PF_UART0_RX
+#define UART_remote_BAUD_RATE                                           (115200)
+#define UART_remote_IBRD_40_MHZ_115200_BAUD                                 (21)
+#define UART_remote_FBRD_40_MHZ_115200_BAUD                                 (45)
+/* Defines for UART_interface */
+#define UART_interface_INST                                                UART1
+#define UART_interface_INST_FREQUENCY                                   40000000
+#define UART_interface_INST_IRQHandler                          UART1_IRQHandler
+#define UART_interface_INST_INT_IRQN                              UART1_INT_IRQn
+#define GPIO_UART_interface_RX_PORT                                        GPIOA
+#define GPIO_UART_interface_TX_PORT                                        GPIOA
+#define GPIO_UART_interface_RX_PIN                                DL_GPIO_PIN_18
+#define GPIO_UART_interface_TX_PIN                                 DL_GPIO_PIN_3
+#define GPIO_UART_interface_IOMUX_RX                             (IOMUX_PINCM40)
+#define GPIO_UART_interface_IOMUX_TX                              (IOMUX_PINCM8)
+#define GPIO_UART_interface_IOMUX_RX_FUNC               IOMUX_PINCM40_PF_UART1_RX
+#define GPIO_UART_interface_IOMUX_TX_FUNC                IOMUX_PINCM8_PF_UART1_TX
+#define UART_interface_BAUD_RATE                                          (9600)
+#define UART_interface_IBRD_40_MHZ_9600_BAUD                               (260)
+#define UART_interface_FBRD_40_MHZ_9600_BAUD                                (27)
+
+
+
+
 /* Defines for SPI_0 */
 #define SPI_0_INST                                                         SPI0
 #define SPI_0_INST_IRQHandler                                   SPI0_IRQHandler
@@ -250,6 +282,8 @@ void SYSCFG_DL_initPower(void);
 void SYSCFG_DL_GPIO_init(void);
 void SYSCFG_DL_SYSCTL_init(void);
 void SYSCFG_DL_TIMER_0_init(void);
+void SYSCFG_DL_UART_remote_init(void);
+void SYSCFG_DL_UART_interface_init(void);
 void SYSCFG_DL_SPI_0_init(void);
 
 void SYSCFG_DL_TRNG_init(void);

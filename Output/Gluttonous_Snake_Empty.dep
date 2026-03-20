@@ -1,6 +1,6 @@
 Dependencies for Project 'Gluttonous_Snake', Target 'Empty': (DO NOT MODIFY !)
 CompilerVersion: 6210000::V6.21::ARMCLANG
-F (..\BSP\bsp.h)(0x69AB9031)()
+F (..\BSP\bsp.h)(0x69BD5132)()
 F (..\BSP\Keyboard.c)(0x69AC41C4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../BSP -I ../Source -I ../Source/third_party/CMSIS/Core/Include -I ../User -I ../BSP/IMU -I ../BSP/IMU/IMU -I ../BSP/IMU/ICM45686-D__UVISION_VERSION="539" -D__MSPM0G3519__ -D__MSPM0G3519__-o ../output/keyboard.o -MD)
 I (..\User\ti_msp_dl_config.hy.\Source\ti\devices\msp\msp.h)(0x00000000)
 I (..\Source\ti\devices\DeviceFamily.h)(0x697864DC)
@@ -156,9 +156,8 @@ I (..\Source\ti\driverlib\dl_vref.hm.\Source\ti\driverlib\dl_wwdt.h)(0x00000000)
 I (..\Source\ti\driverlib\m0p\dl_interrupt.h)(0x697864E4)
 I (..\Source\ti\driverlib\m0p\dl_systick.h..\BSP\oledfont.h)(0x00000000)
 I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\string.h)(0x6569B012)
-F (..\BSP\interface.c)(0x69BBFD01)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../BSP -I ../Source -I ../Source/third_party/CMSIS/Core/Include -I ../User -I ../BSP/IMU -I ../BSP/IMU/IMU -I ../BSP/IMU/ICM45686-D__UVISION_VERSION="539" -D__MSPM0G3519__ -D__MSPM0G3519__-o ../output/interface.o -MD)
-I (..\User\ti_msp_dl_config.hn.\Source\ti\devices\msp\msp.h)(0x00000000)
-I (..\Source\ti\devices\DeviceFamily.h)(0x697864DC)
+F (..\BSP\interface.c)(0x69BD5806)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../BSP -I ../Source -I ../Source/third_party/CMSIS/Core/Include -I ../User -I ../BSP/IMU -I ../BSP/IMU/IMU -I ../BSP/IMU/ICM45686-D__UVISION_VERSION="539" -D__MSPM0G3519__ -D__MSPM0G3519__-o ../output/interface.o -MD)
+I (..\Source\ti\devices\msp\msp.h)(0x697864DC)
 I (..\Source\ti\devices\msp\m0p\mspm0g351x.h)(0x697864DC)
 I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
 I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6569B012)
@@ -232,93 +231,17 @@ I (..\Source\ti\driverlib\dl_unicommspi.h)(0x697864DE)
 I (..\Source\ti\driverlib\dl_unicommuart.h)(0x697864DE)
 I (..\Source\ti\driverlib\dl_vref.hm.\Source\ti\driverlib\dl_wwdt.h)(0x00000000)
 I (..\Source\ti\driverlib\m0p\dl_interrupt.h)(0x697864E4)
-I (..\Source\ti\driverlib\m0p\dl_systick.h..\BSP\oled_spi_V0.2.h)(0x00000000)
-I (..\BSP\function.he.\BSP\Keyboard.h)(0x00000000)
-F (..\BSP\interface.h)(0x69BBFCAB)()
-F (..\BSP\function.h)(0x69B40BD3)()
-F (..\BSP\function.c)(0x69BBFC61)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../BSP -I ../Source -I ../Source/third_party/CMSIS/Core/Include -I ../User -I ../BSP/IMU -I ../BSP/IMU/IMU -I ../BSP/IMU/ICM45686-D__UVISION_VERSION="539" -D__MSPM0G3519__ -D__MSPM0G3519__-o ../output/function.o -MD)
-I (..\User\ti_msp_dl_config.hn.\Source\ti\devices\msp\msp.h)(0x00000000)
-I (..\Source\ti\devices\DeviceFamily.h)(0x697864DC)
-I (..\Source\ti\devices\msp\m0p\mspm0g351x.h)(0x697864DC)
-I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
-I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6569B012)
-I (..\Source\third_party\CMSIS\Core\Include\core_cm0plus.h)(0x697864D4)
-I (D:\ZLearning\NUEDC_Project\EVM_G3519\Code\Gluttonous_Snake\Source\third_party\CMSIS\Core\Include\cmsis_version.h)(0x697864D4)
-I (D:\ZLearning\NUEDC_Project\EVM_G3519\Code\Gluttonous_Snake\Source\third_party\CMSIS\Core\Include\cmsis_compiler.h)(0x697864D4)
-I (D:\ZLearning\NUEDC_Project\EVM_G3519\Code\Gluttonous_Snake\Source\third_party\CMSIS\Core\Include\cmsis_armclang.h)(0x697864D4)
-I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\arm_compat.h)(0x64F9642C)
-I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x6569B010)
-I (D:\ZLearning\NUEDC_Project\EVM_G3519\Code\Gluttonous_Snake\Source\third_party\CMSIS\Core\Include\mpu_armv7.h)(0x697864D4)
-I (..\Source\ti\devices\msp\peripherals\hw_adc12.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_aesadv.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_comp.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_crcp.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_dac12.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_dma.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_flashctl.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_gpio.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_gptimer.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_i2c.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_iomux.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_keystorectl.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_lfss.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_mathacl.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_mcan.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_rtc.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_spi.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_trng.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_uart.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_vref.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_wuc.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\hw_wwdt.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\m0p\hw_factoryregion.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\m0p\hw_cpuss.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\m0p\hw_debugss.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\m0p\hw_sysctl.h)(0x697864DE)
-I (..\Source\ti\devices\msp\peripherals\m0p\sysctl\hw_sysctl_mspm0gx51x.h)(0x697864DE)
-I (..\Source\ti\driverlib\driverlib.hl.\Source\ti\driverlib\dl_adc12.h)(0x00000000)
-I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\math.h)(0x6569B012)
-I (..\Source\ti\driverlib\dl_common.h)(0x697864DE)
-I (..\Source\ti\driverlib\m0p\dl_factoryregion.h)(0x697864E4)
-I (..\Source\ti\driverlib\m0p\dl_core.hy.\Source\ti\driverlib\dl_aes.h)(0x00000000)
-I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stddef.h)(0x6569B012)
-I (..\Source\ti\driverlib\dl_aesadv.hd.\Source\ti\driverlib\dl_comp.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_crc.hv.\Source\ti\driverlib\dl_crcp.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_dac12.h\.\Source\ti\driverlib\dl_dma.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_flashctl.h)(0x697864DE)
-I (..\Source\ti\driverlib\m0p\dl_sysctl.h)(0x697864E4)
-I (..\Source\ti\driverlib\m0p\sysctl\dl_sysctl_mspm0gx51x.h)(0x697864E4)
-I (..\Source\ti\driverlib\dl_gpamp.h\.\Source\ti\driverlib\dl_gpio.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_i2c.h..\Source\ti\driverlib\dl_i2s.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_iwdt.h..\Source\ti\driverlib\dl_lfss.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_keystorectl.h)(0x697864DE)
-I (..\Source\ti\driverlib\dl_lcd.ho.\Source\ti\driverlib\dl_mathacl.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_mcan.h..\Source\ti\driverlib\dl_npu.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_opa.hh.\Source\ti\driverlib\dl_rtc.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_rtc_common.h)(0x697864DE)
-I (..\Source\ti\driverlib\dl_rtc_a.hm.\Source\ti\driverlib\dl_rtc_b.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_scratchpad.h)(0x697864DE)
-I (..\Source\ti\driverlib\dl_spgss.hp.\Source\ti\driverlib\dl_spi.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_tamperio.h)(0x697864DE)
-I (..\Source\ti\driverlib\dl_timera.h..\Source\ti\driverlib\dl_timer.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_timerb.h..\Source\ti\driverlib\dl_timerg.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_trng.h)(0x697864DE)
-I (..\Source\ti\driverlib\dl_uart_extend.h)(0x697864DE)
-I (..\Source\ti\driverlib\dl_uart.hx.\Source\ti\driverlib\dl_uart_main.h)(0x00000000)
-I (..\Source\ti\driverlib\dl_unicomm.h)(0x697864DE)
-I (..\Source\ti\driverlib\dl_unicommi2cc.h)(0x697864DE)
-I (..\Source\ti\driverlib\dl_unicommi2ct.h)(0x697864DE)
-I (..\Source\ti\driverlib\dl_unicommspi.h)(0x697864DE)
-I (..\Source\ti\driverlib\dl_unicommuart.h)(0x697864DE)
-I (..\Source\ti\driverlib\dl_vref.hm.\Source\ti\driverlib\dl_wwdt.h)(0x00000000)
-I (..\Source\ti\driverlib\m0p\dl_interrupt.h)(0x697864E4)
-I (..\Source\ti\driverlib\m0p\dl_systick.h..\BSP\interface.h)(0x00000000)
-I (..\BSP\oled_spi_V0.2.h\.\BSP\Keyboard.h)(0x00000000)
+I (..\Source\ti\driverlib\m0p\dl_systick.h)(0x697864E4)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x6569B012)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\string.h)(0x6569B012)
 I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x6569B012)
-I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\time.h)(0x6569B012)
-F (..\User\config.syscfg)(0x69B02392)()
-F (..\User\main.c)(0x69B41367)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../BSP -I ../Source -I ../Source/third_party/CMSIS/Core/Include -I ../User -I ../BSP/IMU -I ../BSP/IMU/IMU -I ../BSP/IMU/ICM45686-D__UVISION_VERSION="539" -D__MSPM0G3519__ -D__MSPM0G3519__-o ../output/main.o -MD)
-I (..\Source\ti\devices\msp\msp.hl.\Source\ti\devices\DeviceFamily.h)(0x00000000)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\time.h..\User\ti_msp_dl_config.h)(0x00000000)
+I (..\BSP\Keyboard.hR.\BSP\oled_spi_V0.2.hm.\BSP\function.h)(0x00000000)
+I (..\BSP\interface.h)(0x69BBFE3E)
+F (..\BSP\interface.h)(0x69BBFE3E)()
+F (..\BSP\function.h)(0x69BBFE47)()
+F (..\BSP\function.c)(0x69BD5B22)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../BSP -I ../Source -I ../Source/third_party/CMSIS/Core/Include -I ../User -I ../BSP/IMU -I ../BSP/IMU/IMU -I ../BSP/IMU/ICM45686-D__UVISION_VERSION="539" -D__MSPM0G3519__ -D__MSPM0G3519__-o ../output/function.o -MD)
+I (..\Source\ti\devices\msp\msp.h)(0x697864DC)
 I (..\Source\ti\devices\msp\m0p\mspm0g351x.h)(0x697864DC)
 I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
 I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6569B012)
@@ -392,12 +315,98 @@ I (..\Source\ti\driverlib\dl_unicommspi.h)(0x697864DE)
 I (..\Source\ti\driverlib\dl_unicommuart.h)(0x697864DE)
 I (..\Source\ti\driverlib\dl_vref.hm.\Source\ti\driverlib\dl_wwdt.h)(0x00000000)
 I (..\Source\ti\driverlib\m0p\dl_interrupt.h)(0x697864E4)
-I (..\Source\ti\driverlib\m0p\dl_systick.h..\BSP\oled_spi_V0.2.h)(0x00000000)
-I (..\BSP\Keyboard.he.\BSP\interface.hc.\BSP\function.h)(0x00000000)
+I (..\Source\ti\driverlib\m0p\dl_systick.h)(0x697864E4)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x6569B012)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\string.h)(0x6569B012)
 I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x6569B012)
-I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\time.h)(0x6569B012)
-F (..\User\ti_msp_dl_config.c)(0x69B02396)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../BSP -I ../Source -I ../Source/third_party/CMSIS/Core/Include -I ../User -I ../BSP/IMU -I ../BSP/IMU/IMU -I ../BSP/IMU/ICM45686-D__UVISION_VERSION="539" -D__MSPM0G3519__ -D__MSPM0G3519__-o ../output/ti_msp_dl_config.o -MD)
-I (..\User\ti_msp_dl_config.h)(0x69B02398)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\time.h..\User\ti_msp_dl_config.h)(0x00000000)
+I (..\BSP\Keyboard.hR.\BSP\oled_spi_V0.2.hm.\BSP\function.h)(0x00000000)
+I (..\BSP\interface.h)(0x69BBFE3E)
+F (..\User\config.syscfg)(0x69BD577E)()
+F (..\User\main.c)(0x69BD52CE)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../BSP -I ../Source -I ../Source/third_party/CMSIS/Core/Include -I ../User -I ../BSP/IMU -I ../BSP/IMU/IMU -I ../BSP/IMU/ICM45686-D__UVISION_VERSION="539" -D__MSPM0G3519__ -D__MSPM0G3519__-o ../output/main.o -MD)
+I (..\Source\ti\devices\msp\msp.hp.\Source\ti\devices\DeviceFamily.h)(0x00000000)
+I (..\Source\ti\devices\msp\m0p\mspm0g351x.h)(0x697864DC)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6569B012)
+I (..\Source\third_party\CMSIS\Core\Include\core_cm0plus.h)(0x697864D4)
+I (D:\ZLearning\NUEDC_Project\EVM_G3519\Code\Gluttonous_Snake\Source\third_party\CMSIS\Core\Include\cmsis_version.h)(0x697864D4)
+I (D:\ZLearning\NUEDC_Project\EVM_G3519\Code\Gluttonous_Snake\Source\third_party\CMSIS\Core\Include\cmsis_compiler.h)(0x697864D4)
+I (D:\ZLearning\NUEDC_Project\EVM_G3519\Code\Gluttonous_Snake\Source\third_party\CMSIS\Core\Include\cmsis_armclang.h)(0x697864D4)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\arm_compat.h)(0x64F9642C)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x6569B010)
+I (D:\ZLearning\NUEDC_Project\EVM_G3519\Code\Gluttonous_Snake\Source\third_party\CMSIS\Core\Include\mpu_armv7.h)(0x697864D4)
+I (..\Source\ti\devices\msp\peripherals\hw_adc12.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_aesadv.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_comp.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_crcp.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_dac12.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_dma.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_flashctl.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_gpio.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_gptimer.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_i2c.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_iomux.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_keystorectl.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_lfss.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_mathacl.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_mcan.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_rtc.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_spi.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_trng.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_uart.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_vref.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_wuc.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\hw_wwdt.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\m0p\hw_factoryregion.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\m0p\hw_cpuss.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\m0p\hw_debugss.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\m0p\hw_sysctl.h)(0x697864DE)
+I (..\Source\ti\devices\msp\peripherals\m0p\sysctl\hw_sysctl_mspm0gx51x.h)(0x697864DE)
+I (..\Source\ti\driverlib\driverlib.hl.\Source\ti\driverlib\dl_adc12.h)(0x00000000)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\math.h)(0x6569B012)
+I (..\Source\ti\driverlib\dl_common.h)(0x697864DE)
+I (..\Source\ti\driverlib\m0p\dl_factoryregion.h)(0x697864E4)
+I (..\Source\ti\driverlib\m0p\dl_core.hy.\Source\ti\driverlib\dl_aes.h)(0x00000000)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stddef.h)(0x6569B012)
+I (..\Source\ti\driverlib\dl_aesadv.hd.\Source\ti\driverlib\dl_comp.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_crc.hv.\Source\ti\driverlib\dl_crcp.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_dac12.h\.\Source\ti\driverlib\dl_dma.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_flashctl.h)(0x697864DE)
+I (..\Source\ti\driverlib\m0p\dl_sysctl.h)(0x697864E4)
+I (..\Source\ti\driverlib\m0p\sysctl\dl_sysctl_mspm0gx51x.h)(0x697864E4)
+I (..\Source\ti\driverlib\dl_gpamp.h\.\Source\ti\driverlib\dl_gpio.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_i2c.h..\Source\ti\driverlib\dl_i2s.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_iwdt.h..\Source\ti\driverlib\dl_lfss.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_keystorectl.h)(0x697864DE)
+I (..\Source\ti\driverlib\dl_lcd.ho.\Source\ti\driverlib\dl_mathacl.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_mcan.h..\Source\ti\driverlib\dl_npu.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_opa.hh.\Source\ti\driverlib\dl_rtc.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_rtc_common.h)(0x697864DE)
+I (..\Source\ti\driverlib\dl_rtc_a.hm.\Source\ti\driverlib\dl_rtc_b.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_scratchpad.h)(0x697864DE)
+I (..\Source\ti\driverlib\dl_spgss.hp.\Source\ti\driverlib\dl_spi.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_tamperio.h)(0x697864DE)
+I (..\Source\ti\driverlib\dl_timera.h..\Source\ti\driverlib\dl_timer.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_timerb.h..\Source\ti\driverlib\dl_timerg.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_trng.h)(0x697864DE)
+I (..\Source\ti\driverlib\dl_uart_extend.h)(0x697864DE)
+I (..\Source\ti\driverlib\dl_uart.hx.\Source\ti\driverlib\dl_uart_main.h)(0x00000000)
+I (..\Source\ti\driverlib\dl_unicomm.h)(0x697864DE)
+I (..\Source\ti\driverlib\dl_unicommi2cc.h)(0x697864DE)
+I (..\Source\ti\driverlib\dl_unicommi2ct.h)(0x697864DE)
+I (..\Source\ti\driverlib\dl_unicommspi.h)(0x697864DE)
+I (..\Source\ti\driverlib\dl_unicommuart.h)(0x697864DE)
+I (..\Source\ti\driverlib\dl_vref.hm.\Source\ti\driverlib\dl_wwdt.h)(0x00000000)
+I (..\Source\ti\driverlib\m0p\dl_interrupt.h)(0x697864E4)
+I (..\Source\ti\driverlib\m0p\dl_systick.h)(0x697864E4)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x6569B012)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\string.h)(0x6569B012)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x6569B012)
+I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\time.h..\User\ti_msp_dl_config.h)(0x00000000)
+I (..\BSP\Keyboard.hR.\BSP\oled_spi_V0.2.hm.\BSP\function.h)(0x00000000)
+I (..\BSP\interface.h)(0x69BBFE3E)
+F (..\User\ti_msp_dl_config.c)(0x69BD5779)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../BSP -I ../Source -I ../Source/third_party/CMSIS/Core/Include -I ../User -I ../BSP/IMU -I ../BSP/IMU/IMU -I ../BSP/IMU/ICM45686-D__UVISION_VERSION="539" -D__MSPM0G3519__ -D__MSPM0G3519__-o ../output/ti_msp_dl_config.o -MD)
+I (..\User\ti_msp_dl_config.h)(0x69BD577B)
 I (..\Source\ti\devices\DeviceFamily.h)(0x697864DC)
 I (..\Source\ti\devices\msp\m0p\mspm0g351x.h)(0x697864DC)
 I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6569B012)
@@ -473,7 +482,7 @@ I (..\Source\ti\driverlib\dl_unicommuart.h)(0x697864DE)
 I (..\Source\ti\driverlib\dl_vref.hm.\Source\ti\driverlib\dl_wwdt.h)(0x00000000)
 I (..\Source\ti\driverlib\m0p\dl_interrupt.h)(0x697864E4)
 I (..\Source\ti\driverlib\m0p\dl_systick.h)(0x697864E4)
-F (..\User\ti_msp_dl_config.h)(0x69B02398)()
+F (..\User\ti_msp_dl_config.h)(0x69BD577B)()
 F (..\Source\ti\driverlib\dl_adc12.c)(0x697864DE)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -Wno-covered-switch-default -Wno-unreachable-code-break -I ../BSP -I ../Source -I ../Source/third_party/CMSIS/Core/Include -I ../User -I ../BSP/IMU -I ../BSP/IMU/IMU -I ../BSP/IMU/ICM45686-D__UVISION_VERSION="539" -D__MSPM0G3519__ -D__MSPM0G3519__-o ../output/dl_adc12.o -MD)
 I (..\Source\ti\driverlib\dl_adc12.h)(0x697864DE)
 I (D:\Keil\Keil_v5\ARM\ARMCLANG\include\math.h)(0x6569B012)
