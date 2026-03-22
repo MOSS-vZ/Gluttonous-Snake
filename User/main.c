@@ -43,22 +43,38 @@ int main()
         if (key && !is_key)
         {
             is_key = 1;
-            if (key == 'A')
+            switch (key)
             {
+            case 'A':
                 game();
                 OLED_Clear();
                 is_first = 1;
+                break;
+            case 'B':
+                key_interface();
+                OLED_Clear();
+            default:
+                break;
             }
+
         }
         else if (key == '\0')
             is_key = 0;
 
-        if (received_byte == 'A')
+        switch (received_byte)
         {
+        case 'A':
             received_byte = '\0';
             game();
             OLED_Clear();
             is_first = 1;
+            break;
+        case 'B':
+            received_byte = '\0';
+            key_interface();
+            OLED_Clear();
+        default:
+            break;
         }
     }
 }

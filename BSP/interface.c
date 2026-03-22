@@ -9,13 +9,21 @@ void boot_screen()
 
 void choice_screen()
 {
-    OLED_ShowCHinese(0, 1, 32);
-    OLED_ShowCHinese(16, 1, 33);
-    OLED_ShowCHinese(32, 1, 34);
-    OLED_ShowCHinese(48, 1, 35);
+    OLED_ShowCHinese(0, 0, 32);
+    OLED_ShowCHinese(16, 0, 33);
+    OLED_ShowCHinese(32, 0, 34);
+    OLED_ShowCHinese(48, 0, 35);
 
-    OLED_ShowCHinese(96, 1, 36);
-    OLED_ShowChar(112, 1, 'A');
+    OLED_ShowCHinese(96, 0, 36);
+    OLED_ShowChar(112, 0, 'A');
+
+    OLED_ShowCHinese(0, 2, 45);
+    OLED_ShowCHinese(16, 2, 46);
+    OLED_ShowCHinese(32, 2, 47);
+    OLED_ShowCHinese(48, 2, 48);
+
+    OLED_ShowCHinese(96, 2, 36);
+    OLED_ShowChar(112, 2, 'B');
 }
 
 void frame_screen()
@@ -130,6 +138,71 @@ void pause_screen(p snake[], p food, int len)
             OLED_DrawPoint(food.x, food.y + 1, 1);
             OLED_DrawPoint(food.x, food.y - 1, 1);
             OLED_Refresh();
+            is_over = 1;
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+void key_interface()
+{
+    bool is_over = 0;
+
+    OLED_Clear();
+
+    OLED_ShowCHinese(0, 0, 41);
+    OLED_ShowCHinese(0, 2, 42);
+    OLED_ShowCHinese(70, 0, 43);
+    OLED_ShowCHinese(70, 2, 44);
+
+    for (int i = 18;i < 45;i += 9)
+        for (int j = 0;j < 4;j += 2)
+            OLED_ShowChar(i, j, '.');
+
+    for (int i = 88;i < 115;i += 9)
+        for (int j = 0;j < 4;j += 2)
+            OLED_ShowChar(i, j, '.');
+
+    OLED_ShowChar(45, 0, '2');
+    OLED_ShowChar(45, 2, '8');
+    OLED_ShowChar(115, 0, '4');
+    OLED_ShowChar(115, 2, '6');
+
+    OLED_ShowCHinese(0, 6, 36);
+    OLED_ShowChar(18, 6, '*');
+    OLED_ShowCHinese(27, 6, 49);
+    OLED_ShowCHinese(43, 6, 50);
+    OLED_ShowCHinese(59, 6, 51);
+    OLED_ShowCHinese(75, 6, 52);
+    OLED_ShowCHinese(91, 6, 53);
+
+    bool is_key = 1;
+    while (!is_over)
+    {
+        char key = KeySCInput();
+        if (key && is_key)
+        {
+            is_key = 0;
+            switch (key)
+            {
+            case '*':
+                is_over = 1;
+                break;
+            default:
+                break;
+            }
+        }
+        else if (key == '\0')
+        {
+            is_key = 1;
+        }
+
+        switch (received_byte)
+        {
+        case '*':
+            received_byte = '\0';
             is_over = 1;
             break;
         default:
