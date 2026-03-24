@@ -7,7 +7,7 @@ bool is_over = 0;//结束标志
 bool is_time = 0;//定时器标志
 uint8_t direction = 0;
 uint8_t score = 0;
-// uint8_t time = 0;
+uint8_t life = 10;
 
 void game()
 {
@@ -41,6 +41,13 @@ void game()
             is_time = 0;
         }
 
+        // 判断是否死亡
+        if (life <= 0)
+        {
+            death_animation();
+            over_screen();
+            is_over = 1;
+        }
         // 键盘输入
         char key = KeySCInput();
         if (key && !is_key)
@@ -54,7 +61,16 @@ void game()
                 DL_Timer_startCounter(TIMER_0_INST);//启动定时器
                 break;
             case '*':           //结束
-                is_over = 1;
+                DL_Timer_stopCounter(TIMER_0_INST);//停止定时器
+                char result = quit_screen(snake, food, len);
+                if (result == '*')
+                {
+                    is_over = 1;
+                }
+                else if (result == '#')
+                {
+                    DL_Timer_startCounter(TIMER_0_INST);//启动定时器
+                }
                 break;
             case '2':case '8':case '4':case '6':    //上下左右
                 direction = key - '0';
@@ -77,7 +93,16 @@ void game()
             break;
         case '*':
             received_byte = '\0';
-            is_over = 1;
+            DL_Timer_stopCounter(TIMER_0_INST);//停止定时器
+            char result = quit_screen(snake, food, len);
+            if (result == '*')
+            {
+                is_over = 1;
+            }
+            else if (result == '#')
+            {
+                DL_Timer_startCounter(TIMER_0_INST);//启动定时器
+            }
             break;
         case '2':case '8':case '4':case '6':    //上下左右
             direction = received_byte - '0';
@@ -144,8 +169,8 @@ void snake_refresh(uint8_t length)
     //边界判断
     if (snake[0].x < left_boundary || snake[0].x >= right_boundary || snake[0].y < upper_boundary || snake[0].y >= lower_boundary)
     {
-        if (score >= 2)
-            score -= 2;
+        if (life >= 2)
+            life -= 2;
         prompt_screen();
         // DL_GPIO_togglePins(LED_L1_PORT, LED_L1_PIN);
     }
@@ -252,4 +277,9 @@ bool is_food_on_snake(uint8_t x, uint8_t y)
 void TIMER_0_INST_IRQHandler()
 {
     is_time = 0;
+}
+
+void death_animation()
+{
+
 }

@@ -399,26 +399,6 @@
               <FileType>1</FileType>
               <FilePath>..\BSP\oled_spi_V0.2.c</FilePath>
             </File>
-            <File>
-              <FileName>interface.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BSP\interface.c</FilePath>
-            </File>
-            <File>
-              <FileName>interface.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\BSP\interface.h</FilePath>
-            </File>
-            <File>
-              <FileName>function.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\BSP\function.h</FilePath>
-            </File>
-            <File>
-              <FileName>function.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BSP\function.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -683,6 +663,31 @@
               <FileName>startup_mspm0g351x_uvision.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\startup_mspm0g351x_uvision.s</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application</GroupName>
+          <Files>
+            <File>
+              <FileName>function.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\function.c</FilePath>
+            </File>
+            <File>
+              <FileName>function.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\function.h</FilePath>
+            </File>
+            <File>
+              <FileName>interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\interface.c</FilePath>
+            </File>
+            <File>
+              <FileName>interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\interface.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -80,11 +80,16 @@ void pause_screen(p snake[], p food, int len)
     OLED_ShowCHinese(62, 4, 36);
     OLED_ShowChar(82, 4, '#');
 
+    char key;                   //用来避免暂停界面闪退的情况
+    do {
+        key = KeySCInput();
+    } while (key != '\0');      //一直循环直到没有按键输入，避免界面闪退
+
     bool is_key = 1;
     bool is_over = 0;
     while (!is_over)
     {
-        char key = KeySCInput();
+        key = KeySCInput();
         if (key && is_key)
         {
             is_key = 0;
@@ -209,4 +214,112 @@ void key_interface()
             break;
         }
     }
+}
+
+char quit_screen(p snake[], p food, int len)
+{
+    // 将蛇和食物点灭
+    for (int i = 0;i < len;i++)
+    {
+        OLED_DrawPoint(snake[i].x, snake[i].y, 0);
+    }
+    OLED_DrawPoint(food.x + 1, food.y, 0);
+    OLED_DrawPoint(food.x - 1, food.y, 0);
+    OLED_DrawPoint(food.x, food.y + 1, 0);
+    OLED_DrawPoint(food.x, food.y - 1, 0);
+    OLED_Refresh();
+
+    // 显示退出界面
+    OLED_ShowCHinese(30, 2, 54);
+    OLED_ShowCHinese(46, 2, 55);
+    OLED_ShowCHinese(62, 2, 56);
+    OLED_ShowCHinese(78, 2, 57);
+
+    OLED_ShowCHinese(30, 4, 58);
+    OLED_ShowChar(50, 4, '*');
+    OLED_ShowCHinese(62, 4, 59);
+    OLED_ShowChar(82, 4, '#');
+
+    char key;                   //用来避免界面闪退的情况
+    do {
+        key = KeySCInput();
+    } while (key != '\0');      //一直循环直到没有按键输入，避免界面闪退
+
+    bool is_key = 1;
+    while (1)
+    {
+        key = KeySCInput();
+        if (key && is_key)
+        {
+            is_key = 0;
+            switch (key)
+            {
+            case '#':
+                // 将暂停界面点灭
+                for (int i = left_boundary - 1;i < right_boundary;i++)
+                {
+                    for (int j = upper_boundary - 1;j < lower_boundary;j++)
+                        OLED_DrawPoint(i, j, 0);
+                }
+                // 重新绘制蛇和食物
+                for (int i = 0;i < len;i++)
+                {
+                    OLED_DrawPoint(snake[i].x, snake[i].y, 1);
+                }
+                OLED_DrawPoint(food.x + 1, food.y, 1);
+                OLED_DrawPoint(food.x - 1, food.y, 1);
+                OLED_DrawPoint(food.x, food.y + 1, 1);
+                OLED_DrawPoint(food.x, food.y - 1, 1);
+                OLED_Refresh();
+                return '#';
+                break;
+            case '*':
+                return '*';
+                break;
+            default:
+                break;
+            }
+        }
+        else if (key == '\0')
+        {
+            is_key = 1;
+        }
+
+        switch (received_byte)
+        {
+        case '#':
+            received_byte = '\0';
+            // 将暂停界面点灭
+            for (int i = left_boundary - 1;i < right_boundary;i++)
+            {
+                for (int j = upper_boundary - 1;j < lower_boundary;j++)
+                    OLED_DrawPoint(i, j, 0);
+            }
+            // 重新绘制蛇和食物
+            for (int i = 0;i < len;i++)
+            {
+                OLED_DrawPoint(snake[i].x, snake[i].y, 1);
+            }
+            OLED_DrawPoint(food.x + 1, food.y, 1);
+            OLED_DrawPoint(food.x - 1, food.y, 1);
+            OLED_DrawPoint(food.x, food.y + 1, 1);
+            OLED_DrawPoint(food.x, food.y - 1, 1);
+            OLED_Refresh();
+            return '#';
+            break;
+        case '*':
+            received_byte = '\0';
+            return '*';
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+void over_screen()
+{
+    OLED_Clear();
+
+
 }

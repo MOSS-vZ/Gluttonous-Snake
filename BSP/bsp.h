@@ -20,8 +20,8 @@
 //#include "Default_Module/LED/led.h"
 #include "Keyboard.h"
 #include "oled_spi_V0.2.h"
-#include "function.h"
-#include "interface.h"
+#include "../Application/function.h"
+#include "../Application/interface.h"
 // #include "oledpicture_V0.2.h"
 //#include "interface.h"
 /*******************************************/

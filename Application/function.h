@@ -27,5 +27,6 @@ void TIMER_0_INST_IRQHandler();
 bool is_food_on_snake(uint8_t x, uint8_t y);
 bool GetPoint(uint8_t x, uint8_t y);
 uint8_t random_range(uint8_t min, uint8_t max);
+void death_animation();
 
 #endif
